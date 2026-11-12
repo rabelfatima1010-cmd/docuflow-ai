@@ -1,0 +1,18 @@
+document_id,vendor,invoice_number,invoice_date,due_date,currency,subtotal,tax,total,category,line_items,source,auto_approved
+1,Northwind Legal Partners,INV-2026-9779,2026-01-25,2026-02-08,EUR,130.15,6.51,136.66,Professional Services,Consultation call = 130.15,upload,yes
+2,PaperTrail Office Supplies,,2026-10-17,,GBP,1896.2,322.35,2218.55,Office Supplies,Toner cartridge = 1896.2,upload,yes
+3,Pixel Hardware Co,INV-2026-3961,2026-10-14,2026-11-28,USD,125.04,0.0,125.04,Hardware & Equipment,Mechanical keyboard = 125.04,upload,yes
+4,Pixel Hardware Co,INV-2026-8424,2026-08-27,2026-10-11,GBP,1583.27,158.33,1741.6,Hardware & Equipment,USB-C dock = 71.0; 27in monitor = 634.5; Laptop stand = 877.77,upload,yes
+6,SwiftShip Couriers,INV-2026-8564,2026-06-27,2026-07-11,PKR,13433.2,671.66,14104.86,Shipping & Logistics,Express parcel = 5281.0; Insurance cover = 8152.2,upload,yes
+7,PaperTrail Office Supplies,INV-2026-3243,2026-10-09,2026-11-08,EUR,1810.52,90.53,1901.05,Office Supplies,Ballpoint pens (50) = 1532.88; Sticky notes = 71.88; Toner cartridge = 190.18; A4 paper (box) = 15.58,upload,yes
+8,Northwind Legal Partners,INV-2026-1884,2026-09-21,2026-11-05,PKR,41987.15,7137.82,49124.97,Professional Services,Filing fees = 32278.92; Consultation call = 9708.23,upload,yes
+9,Northwind Legal Partners,,2026-10-18,,USD,379.73,0.0,379.73,Professional Services,Filing fees = 379.73,upload,yes
+10,BrightGrid Electric,INV-2026-2889,2026-08-31,2026-09-14,PKR,29717.92,2971.79,32689.71,Utilities,Meter service fee = 25361.08; Electricity usage = 4356.84,upload,yes
+11,Pixel Hardware Co,INV-2026-3401,2026-09-28,2026-10-28,USD,279.39,27.94,307.33,Hardware & Equipment,USB-C dock = 279.39,upload,yes
+12,Pixel Hardware Co,INV-2026-7564,2026-04-10,2026-04-24,PKR,48625.31,4862.53,53487.84,Hardware & Equipment,Mechanical keyboard = 28831.68; USB-C dock = 19793.63,upload,yes
+13,SwiftShip Couriers,INV-2026-4612,2026-07-06,2026-07-20,PKR,16218.48,810.92,17029.4,Shipping & Logistics,Express parcel = 16218.48,upload,yes
+15,PaperTrail Office Supplies,INV-2026-3476,2026-03-07,2026-03-21,EUR,1027.11,51.36,1078.47,Office Supplies,Toner cartridge = 441.64; Ballpoint pens (50) = 22.98; Sticky notes = 212.05; A4 paper (box) = 350.44,upload,yes
+16,Pixel Hardware Co,INV-2026-9918,2026-06-16,2026-07-16,EUR,3179.01,0.0,3179.01,Hardware & Equipment,Mechanical keyboard = 1632.85; 27in monitor = 849.95; Laptop stand = 274.55; USB-C dock = 421.66,upload,yes
+17,CloudNest Hosting LLC,INV-2026-2971,2026-08-31,2026-10-15,EUR,1068.5,181.65,1250.15,Software & SaaS,Backup storage 500GB = 1068.5,upload,yes
+18,BrightGrid Electric,INV-2026-1456,2026-09-17,2026-10-17,USD,738.51,36.93,775.44,Utilities,Meter service fee = 738.51,upload,yes
+20,Bean & Byte Cafe,,2026-07-23,,USD,2719.97,0.0,2719.97,Meals & Entertainment,Club sandwich = 1590.6; Team lunch platter = 550.52; Cappuccino = 289.16; Mineral water = 289.69,upload,yes

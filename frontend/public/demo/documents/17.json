@@ -1,0 +1,81 @@
+{
+ "id": 17,
+ "filename": "sample_017.png",
+ "source": "upload",
+ "status": "approved",
+ "vendor_name": "CloudNest Hosting LLC",
+ "invoice_date": "2026-08-31",
+ "total": 1250.15,
+ "currency": "EUR",
+ "category": "Software & SaaS",
+ "confidence": 0.99,
+ "error": null,
+ "created_at": "2026-11-12T11:26:19.382542",
+ "mime_type": "image/png",
+ "extraction": {
+  "version": 1,
+  "data": {
+   "doc_type": "invoice",
+   "vendor_name": "CloudNest Hosting LLC",
+   "vendor_tax_id": null,
+   "invoice_number": "INV-2026-2971",
+   "invoice_date": "2026-08-31",
+   "due_date": "2026-10-15",
+   "currency": "EUR",
+   "subtotal": 1068.5,
+   "tax": 181.65,
+   "total": 1250.15,
+   "line_items": [
+    {
+     "description": "Backup storage 500GB",
+     "quantity": 5.0,
+     "unit_price": 213.7,
+     "amount": 1068.5
+    }
+   ],
+   "category": "Software & SaaS",
+   "field_confidence": {
+    "vendor_name": 0.99,
+    "invoice_number": 0.99,
+    "invoice_date": 0.99,
+    "total": 0.99,
+    "line_items": 0.99
+   }
+  },
+  "confidence": 0.99,
+  "model": "gpt-6.1-sol",
+  "attempts": 1,
+  "cost_usd": 0.009492,
+  "latency_ms": 6551,
+  "created_at": "2026-11-12T11:26:26.064706"
+ },
+ "approved_data": {
+  "doc_type": "invoice",
+  "vendor_name": "CloudNest Hosting LLC",
+  "vendor_tax_id": null,
+  "invoice_number": "INV-2026-2971",
+  "invoice_date": "2026-08-31",
+  "due_date": "2026-10-15",
+  "currency": "EUR",
+  "subtotal": 1068.5,
+  "tax": 181.65,
+  "total": 1250.15,
+  "line_items": [
+   {
+    "description": "Backup storage 500GB",
+    "quantity": 5.0,
+    "unit_price": 213.7,
+    "amount": 1068.5
+   }
+  ],
+  "category": "Software & SaaS",
+  "field_confidence": {
+   "vendor_name": 0.99,
+   "invoice_number": 0.99,
+   "invoice_date": 0.99,
+   "total": 0.99,
+   "line_items": 0.99
+  }
+ },
+ "issues": []
+}

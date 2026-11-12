@@ -1,4 +1,7 @@
 export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+/** Hosted read-only demo: data comes from a static snapshot in /public/demo (scripts/export_demo.py). */
+export const DEMO = process.env.NEXT_PUBLIC_DEMO_MODE === "1";
+export const REPO_URL = "https://github.com/rabelfatima1010-cmd/docuflow-ai";
 
 export type Status =
   | "queued"
@@ -105,7 +108,44 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   return res.json() as Promise<T>;
 }
 
-export const api = {
+// ---------- demo mode (static snapshot; review actions are simulated in memory) ----------
+
+const demoOverrides = new Map<number, Partial<DocumentDetail>>();
+
+async function demoJson<T>(file: string): Promise<T> {
+  const res = await fetch(`/demo/${file}`, { cache: "force-cache" });
+  if (!res.ok) throw new Error("Document not found in this demo");
+  return res.json() as Promise<T>;
+}
+
+const demoApi = {
+  health: () => demoJson<{ ok: boolean; extractor: string; model: string; queue: string }>("health.json"),
+  categories: () => demoJson<string[]>("categories.json"),
+  list: async (status?: string) => {
+    const docs = (await demoJson<DocumentSummary[]>("documents.json")).map((d) => ({ ...d, ...demoOverrides.get(d.id) }));
+    return status ? docs.filter((d) => status.split(",").includes(d.status)) : docs;
+  },
+  get: async (id: number) => ({ ...(await demoJson<DocumentDetail>(`documents/${id}.json`)), ...demoOverrides.get(id) }),
+  fileUrl: (id: number) => `/demo/files/${id}.png`,
+  upload: async (_files: File[]): Promise<UploadResult[]> => {
+    throw new Error("Uploads are turned off in the live demo. Clone the repo to try your own invoices.");
+  },
+  approve: async (id: number, data: Invoice) => {
+    demoOverrides.set(id, { status: "approved", approved_data: data, issues: [], vendor_name: data.vendor_name, total: data.total });
+    return demoApi.get(id);
+  },
+  reject: async (id: number) => {
+    demoOverrides.set(id, { status: "rejected" });
+    return demoApi.get(id);
+  },
+  reprocess: async (_id: number): Promise<DocumentDetail> => {
+    throw new Error("Re-running the AI is turned off in the live demo.");
+  },
+  stats: () => demoJson<Stats>("stats.json"),
+  csvUrl: () => "/demo/export.csv",
+};
+
+const liveApi = {
   health: () => request<{ ok: boolean; extractor: string; model: string; queue: string }>("/api/health"),
   categories: () => request<string[]>("/api/categories"),
   list: (status?: string) =>
@@ -128,6 +168,8 @@ export const api = {
   stats: () => request<Stats>("/api/stats"),
   csvUrl: () => `${API_URL}/api/export.csv`,
 };
+
+export const api = DEMO ? demoApi : liveApi;
 
 export function money(value: number | null | undefined, currency?: string | null) {
   if (value === null || value === undefined) return "-";

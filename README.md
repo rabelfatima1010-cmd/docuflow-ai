@@ -151,6 +151,18 @@ eval/run_eval.py           accuracy harness
 scripts/make_samples.py    synthetic invoice generator
 ```
 
+## Hosted read-only demo
+
+The public demo is the frontend alone, built with `NEXT_PUBLIC_DEMO_MODE=1`. It reads a static snapshot of a real run from `frontend/public/demo/`, so it needs no backend and no API key, and visitors can't spend credits. Review and approve work in the browser but aren't saved; uploads are off.
+
+To refresh the snapshot, process documents locally with the API running, then:
+
+```bash
+backend\.venv\Scripts\python scripts\export_demo.py
+```
+
+Deploy `frontend/` to Vercel (root directory `frontend`, env var `NEXT_PUBLIC_DEMO_MODE=1`).
+
 ## Before putting it online
 
 - Add authentication. The API is open and the demo has no logins.

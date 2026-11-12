@@ -1,0 +1,81 @@
+{
+ "id": 2,
+ "filename": "sample_002.png",
+ "source": "upload",
+ "status": "approved",
+ "vendor_name": "PaperTrail Office Supplies",
+ "invoice_date": "2026-10-17",
+ "total": 2218.55,
+ "currency": "GBP",
+ "category": "Office Supplies",
+ "confidence": 1.0,
+ "error": null,
+ "created_at": "2026-11-12T11:25:33.117786",
+ "mime_type": "image/png",
+ "extraction": {
+  "version": 1,
+  "data": {
+   "doc_type": "receipt",
+   "vendor_name": "PaperTrail Office Supplies",
+   "vendor_tax_id": "TAX-239643",
+   "invoice_number": null,
+   "invoice_date": "2026-10-17",
+   "due_date": null,
+   "currency": "GBP",
+   "subtotal": 1896.2,
+   "tax": 322.35,
+   "total": 2218.55,
+   "line_items": [
+    {
+     "description": "Toner cartridge",
+     "quantity": 5.0,
+     "unit_price": 379.24,
+     "amount": 1896.2
+    }
+   ],
+   "category": "Office Supplies",
+   "field_confidence": {
+    "vendor_name": 1.0,
+    "invoice_number": 1.0,
+    "invoice_date": 1.0,
+    "total": 1.0,
+    "line_items": 1.0
+   }
+  },
+  "confidence": 1.0,
+  "model": "gpt-6.1-sol",
+  "attempts": 1,
+  "cost_usd": 0.006186,
+  "latency_ms": 5343,
+  "created_at": "2026-11-12T11:25:40.499428"
+ },
+ "approved_data": {
+  "doc_type": "receipt",
+  "vendor_name": "PaperTrail Office Supplies",
+  "vendor_tax_id": "TAX-239643",
+  "invoice_number": null,
+  "invoice_date": "2026-10-17",
+  "due_date": null,
+  "currency": "GBP",
+  "subtotal": 1896.2,
+  "tax": 322.35,
+  "total": 2218.55,
+  "line_items": [
+   {
+    "description": "Toner cartridge",
+    "quantity": 5.0,
+    "unit_price": 379.24,
+    "amount": 1896.2
+   }
+  ],
+  "category": "Office Supplies",
+  "field_confidence": {
+   "vendor_name": 1.0,
+   "invoice_number": 1.0,
+   "invoice_date": 1.0,
+   "total": 1.0,
+   "line_items": 1.0
+  }
+ },
+ "issues": []
+}

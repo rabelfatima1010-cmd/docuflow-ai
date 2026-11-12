@@ -1,0 +1,93 @@
+{
+ "id": 12,
+ "filename": "sample_012.png",
+ "source": "upload",
+ "status": "approved",
+ "vendor_name": "Pixel Hardware Co",
+ "invoice_date": "2026-04-10",
+ "total": 53487.84,
+ "currency": "PKR",
+ "category": "Hardware & Equipment",
+ "confidence": 1.0,
+ "error": null,
+ "created_at": "2026-11-12T11:26:03.962335",
+ "mime_type": "image/png",
+ "extraction": {
+  "version": 1,
+  "data": {
+   "doc_type": "invoice",
+   "vendor_name": "Pixel Hardware Co",
+   "vendor_tax_id": "TAX-734534",
+   "invoice_number": "INV-2026-7564",
+   "invoice_date": "2026-04-10",
+   "due_date": "2026-04-24",
+   "currency": "PKR",
+   "subtotal": 48625.31,
+   "tax": 4862.53,
+   "total": 53487.84,
+   "line_items": [
+    {
+     "description": "Mechanical keyboard",
+     "quantity": 4.0,
+     "unit_price": 7207.92,
+     "amount": 28831.68
+    },
+    {
+     "description": "USB-C dock",
+     "quantity": 1.0,
+     "unit_price": 19793.63,
+     "amount": 19793.63
+    }
+   ],
+   "category": "Hardware & Equipment",
+   "field_confidence": {
+    "vendor_name": 1.0,
+    "invoice_number": 1.0,
+    "invoice_date": 1.0,
+    "total": 1.0,
+    "line_items": 1.0
+   }
+  },
+  "confidence": 1.0,
+  "model": "gpt-6.1-sol",
+  "attempts": 1,
+  "cost_usd": 0.009472,
+  "latency_ms": 7746,
+  "created_at": "2026-11-12T11:26:11.862438"
+ },
+ "approved_data": {
+  "doc_type": "invoice",
+  "vendor_name": "Pixel Hardware Co",
+  "vendor_tax_id": "TAX-734534",
+  "invoice_number": "INV-2026-7564",
+  "invoice_date": "2026-04-10",
+  "due_date": "2026-04-24",
+  "currency": "PKR",
+  "subtotal": 48625.31,
+  "tax": 4862.53,
+  "total": 53487.84,
+  "line_items": [
+   {
+    "description": "Mechanical keyboard",
+    "quantity": 4.0,
+    "unit_price": 7207.92,
+    "amount": 28831.68
+   },
+   {
+    "description": "USB-C dock",
+    "quantity": 1.0,
+    "unit_price": 19793.63,
+    "amount": 19793.63
+   }
+  ],
+  "category": "Hardware & Equipment",
+  "field_confidence": {
+   "vendor_name": 1.0,
+   "invoice_number": 1.0,
+   "invoice_date": 1.0,
+   "total": 1.0,
+   "line_items": 1.0
+  }
+ },
+ "issues": []
+}

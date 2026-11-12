@@ -1,0 +1,81 @@
+{
+ "id": 1,
+ "filename": "sample_001.png",
+ "source": "upload",
+ "status": "approved",
+ "vendor_name": "Northwind Legal Partners",
+ "invoice_date": "2026-01-25",
+ "total": 136.66,
+ "currency": "EUR",
+ "category": "Professional Services",
+ "confidence": 1.0,
+ "error": null,
+ "created_at": "2026-11-12T11:25:33.101360",
+ "mime_type": "image/png",
+ "extraction": {
+  "version": 1,
+  "data": {
+   "doc_type": "invoice",
+   "vendor_name": "Northwind Legal Partners",
+   "vendor_tax_id": "TAX-173248",
+   "invoice_number": "INV-2026-9779",
+   "invoice_date": "2026-01-25",
+   "due_date": "2026-02-08",
+   "currency": "EUR",
+   "subtotal": 130.15,
+   "tax": 6.51,
+   "total": 136.66,
+   "line_items": [
+    {
+     "description": "Consultation call",
+     "quantity": 5.0,
+     "unit_price": 26.03,
+     "amount": 130.15
+    }
+   ],
+   "category": "Professional Services",
+   "field_confidence": {
+    "vendor_name": 1.0,
+    "invoice_number": 1.0,
+    "invoice_date": 1.0,
+    "total": 1.0,
+    "line_items": 1.0
+   }
+  },
+  "confidence": 1.0,
+  "model": "gpt-6.1-sol",
+  "attempts": 1,
+  "cost_usd": 0.009012,
+  "latency_ms": 5630,
+  "created_at": "2026-11-12T11:25:40.774419"
+ },
+ "approved_data": {
+  "doc_type": "invoice",
+  "vendor_name": "Northwind Legal Partners",
+  "vendor_tax_id": "TAX-173248",
+  "invoice_number": "INV-2026-9779",
+  "invoice_date": "2026-01-25",
+  "due_date": "2026-02-08",
+  "currency": "EUR",
+  "subtotal": 130.15,
+  "tax": 6.51,
+  "total": 136.66,
+  "line_items": [
+   {
+    "description": "Consultation call",
+    "quantity": 5.0,
+    "unit_price": 26.03,
+    "amount": 130.15
+   }
+  ],
+  "category": "Professional Services",
+  "field_confidence": {
+   "vendor_name": 1.0,
+   "invoice_number": 1.0,
+   "invoice_date": 1.0,
+   "total": 1.0,
+   "line_items": 1.0
+  }
+ },
+ "issues": []
+}

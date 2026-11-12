@@ -1,0 +1,72 @@
+{
+ "id": 19,
+ "filename": "sample_019.png",
+ "source": "upload",
+ "status": "needs_review",
+ "vendor_name": "Pixel Hardware Co",
+ "invoice_date": "2026-05-13",
+ "total": 1844.37,
+ "currency": "EUR",
+ "category": "Hardware & Equipment",
+ "confidence": 0.69,
+ "error": null,
+ "created_at": "2026-11-12T11:26:19.450603",
+ "mime_type": "image/png",
+ "extraction": {
+  "version": 1,
+  "data": {
+   "doc_type": "invoice",
+   "vendor_name": "Pixel Hardware Co",
+   "vendor_tax_id": "TAX-243921",
+   "invoice_number": "INV-2026-4319",
+   "invoice_date": "2026-05-13",
+   "due_date": "2026-06-27",
+   "currency": "EUR",
+   "subtotal": 1756.54,
+   "tax": 87.83,
+   "total": 1844.37,
+   "line_items": [
+    {
+     "description": "Mechanical keyboard",
+     "quantity": 4.0,
+     "unit_price": 128.44,
+     "amount": 513.76
+    },
+    {
+     "description": "Laptop stand",
+     "quantity": 2.0,
+     "unit_price": 173.05,
+     "amount": 346.1
+    },
+    {
+     "description": "27in monitor",
+     "quantity": 2.0,
+     "unit_price": 268.78,
+     "amount": 537.56
+    },
+    {
+     "description": "USB-C dock",
+     "quantity": 1.0,
+     "unit_price": 359.12,
+     "amount": 359.12
+    }
+   ],
+   "category": "Hardware & Equipment",
+   "field_confidence": {
+    "vendor_name": 0.69,
+    "invoice_number": 0.69,
+    "invoice_date": 0.69,
+    "total": 0.69,
+    "line_items": 0.69
+   }
+  },
+  "confidence": 0.69,
+  "model": "gpt-6.1-sol",
+  "attempts": 1,
+  "cost_usd": 0.010492,
+  "latency_ms": 7752,
+  "created_at": "2026-11-12T11:26:27.299845"
+ },
+ "approved_data": null,
+ "issues": []
+}

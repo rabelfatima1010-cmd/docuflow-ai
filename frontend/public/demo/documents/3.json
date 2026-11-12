@@ -1,0 +1,81 @@
+{
+ "id": 3,
+ "filename": "sample_003.png",
+ "source": "upload",
+ "status": "approved",
+ "vendor_name": "Pixel Hardware Co",
+ "invoice_date": "2026-10-14",
+ "total": 125.04,
+ "currency": "USD",
+ "category": "Hardware & Equipment",
+ "confidence": 0.99,
+ "error": null,
+ "created_at": "2026-11-12T11:25:33.150408",
+ "mime_type": "image/png",
+ "extraction": {
+  "version": 1,
+  "data": {
+   "doc_type": "invoice",
+   "vendor_name": "Pixel Hardware Co",
+   "vendor_tax_id": null,
+   "invoice_number": "INV-2026-3961",
+   "invoice_date": "2026-10-14",
+   "due_date": "2026-11-28",
+   "currency": "USD",
+   "subtotal": 125.04,
+   "tax": 0.0,
+   "total": 125.04,
+   "line_items": [
+    {
+     "description": "Mechanical keyboard",
+     "quantity": 3.0,
+     "unit_price": 41.68,
+     "amount": 125.04
+    }
+   ],
+   "category": "Hardware & Equipment",
+   "field_confidence": {
+    "vendor_name": 0.99,
+    "invoice_number": 0.99,
+    "invoice_date": 0.99,
+    "total": 0.99,
+    "line_items": 0.99
+   }
+  },
+  "confidence": 0.99,
+  "model": "gpt-6.1-sol",
+  "attempts": 1,
+  "cost_usd": 0.008952,
+  "latency_ms": 6903,
+  "created_at": "2026-11-12T11:25:42.051958"
+ },
+ "approved_data": {
+  "doc_type": "invoice",
+  "vendor_name": "Pixel Hardware Co",
+  "vendor_tax_id": null,
+  "invoice_number": "INV-2026-3961",
+  "invoice_date": "2026-10-14",
+  "due_date": "2026-11-28",
+  "currency": "USD",
+  "subtotal": 125.04,
+  "tax": 0.0,
+  "total": 125.04,
+  "line_items": [
+   {
+    "description": "Mechanical keyboard",
+    "quantity": 3.0,
+    "unit_price": 41.68,
+    "amount": 125.04
+   }
+  ],
+  "category": "Hardware & Equipment",
+  "field_confidence": {
+   "vendor_name": 0.99,
+   "invoice_number": 0.99,
+   "invoice_date": 0.99,
+   "total": 0.99,
+   "line_items": 0.99
+  }
+ },
+ "issues": []
+}

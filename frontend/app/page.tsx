@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ConfidenceBar, StatusBadge } from "@/components/StatusBadge";
-import { api, money, type DocumentSummary, type UploadResult } from "@/lib/api";
+import { api, DEMO, money, REPO_URL, type DocumentSummary, type UploadResult } from "@/lib/api";
 
 const FILTERS = [
   { label: "All", value: "" },
@@ -75,6 +75,19 @@ export default function InboxPage() {
         )}
       </div>
 
+      {DEMO ? (
+        <div className="card p-6 text-center text-sm">
+          <div className="font-semibold">Uploads are turned off in this live demo</div>
+          <div className="muted mt-1">
+            Open any invoice below to see what the AI extracted, or check the ones flagged for review.{" "}
+            To run it on your own invoices,{" "}
+            <a className="underline" href={REPO_URL} target="_blank" rel="noreferrer">
+              clone the repo
+            </a>
+            .
+          </div>
+        </div>
+      ) : (
       <div
         className="card flex cursor-pointer flex-col items-center justify-center gap-2 border-dashed p-8 text-center"
         style={{ borderStyle: "dashed", borderWidth: 2, borderColor: dragOver ? "var(--accent)" : "var(--border)" }}
@@ -104,6 +117,7 @@ export default function InboxPage() {
           onChange={(e) => upload(e.target.files)}
         />
       </div>
+      )}
 
       {lastUpload.some((u) => u.status !== "queued") && (
         <div className="card p-3 text-sm space-y-1">

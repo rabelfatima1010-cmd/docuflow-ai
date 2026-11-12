@@ -1,0 +1,6 @@
+{
+ "ok": true,
+ "extractor": "openai",
+ "model": "gpt-6.1-sol",
+ "queue": "demo snapshot"
+}

@@ -1,0 +1,74 @@
+{
+ "id": 5,
+ "filename": "sample_005.png",
+ "source": "upload",
+ "status": "needs_review",
+ "vendor_name": "Northwind Legal Partners",
+ "invoice_date": "2026-08-04",
+ "total": 2940.72,
+ "currency": "EUR",
+ "category": "Professional Services",
+ "confidence": 0.4,
+ "error": null,
+ "created_at": "2026-11-12T11:25:33.220390",
+ "mime_type": "image/png",
+ "extraction": {
+  "version": 1,
+  "data": {
+   "doc_type": "invoice",
+   "vendor_name": "Northwind Legal Partners",
+   "vendor_tax_id": "TAX-835567",
+   "invoice_number": "INV-2026-2271",
+   "invoice_date": "2026-08-04",
+   "due_date": "2026-08-18",
+   "currency": "EUR",
+   "subtotal": 2650.2,
+   "tax": 265.02,
+   "total": 2940.72,
+   "line_items": [
+    {
+     "description": "Filing fees",
+     "quantity": 3.0,
+     "unit_price": 238.96,
+     "amount": 716.88
+    },
+    {
+     "description": "Consultation call",
+     "quantity": 5.0,
+     "unit_price": 319.37,
+     "amount": 1596.85
+    },
+    {
+     "description": "Contract review (hours)",
+     "quantity": 1.0,
+     "unit_price": 336.47,
+     "amount": 336.47
+    }
+   ],
+   "category": "Professional Services",
+   "field_confidence": {
+    "vendor_name": 1.0,
+    "invoice_number": 1.0,
+    "invoice_date": 1.0,
+    "total": 0.65,
+    "line_items": 1.0
+   }
+  },
+  "confidence": 0.4,
+  "model": "gpt-6.1-sol",
+  "attempts": 3,
+  "cost_usd": 0.031764,
+  "latency_ms": 19663,
+  "created_at": "2026-11-12T11:25:54.818881"
+ },
+ "approved_data": null,
+ "issues": [
+  {
+   "rule": "totals_math",
+   "field": "total",
+   "message": "Subtotal 2650.20 + tax 265.02 = 2915.22, but total is 2940.72.",
+   "severity": "error",
+   "id": 1
+  }
+ ]
+}

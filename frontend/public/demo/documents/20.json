@@ -1,0 +1,117 @@
+{
+ "id": 20,
+ "filename": "sample_020.png",
+ "source": "upload",
+ "status": "approved",
+ "vendor_name": "Bean & Byte Cafe",
+ "invoice_date": "2026-07-23",
+ "total": 2719.97,
+ "currency": "USD",
+ "category": "Meals & Entertainment",
+ "confidence": 0.99,
+ "error": null,
+ "created_at": "2026-11-12T11:26:19.485008",
+ "mime_type": "image/png",
+ "extraction": {
+  "version": 1,
+  "data": {
+   "doc_type": "receipt",
+   "vendor_name": "Bean & Byte Cafe",
+   "vendor_tax_id": "TAX-837307",
+   "invoice_number": null,
+   "invoice_date": "2026-07-23",
+   "due_date": null,
+   "currency": "USD",
+   "subtotal": 2719.97,
+   "tax": 0.0,
+   "total": 2719.97,
+   "line_items": [
+    {
+     "description": "Club sandwich",
+     "quantity": 4.0,
+     "unit_price": 397.65,
+     "amount": 1590.6
+    },
+    {
+     "description": "Team lunch platter",
+     "quantity": 4.0,
+     "unit_price": 137.63,
+     "amount": 550.52
+    },
+    {
+     "description": "Cappuccino",
+     "quantity": 2.0,
+     "unit_price": 144.58,
+     "amount": 289.16
+    },
+    {
+     "description": "Mineral water",
+     "quantity": 1.0,
+     "unit_price": 289.69,
+     "amount": 289.69
+    }
+   ],
+   "category": "Meals & Entertainment",
+   "field_confidence": {
+    "vendor_name": 0.99,
+    "invoice_number": 0.99,
+    "invoice_date": 0.99,
+    "total": 0.99,
+    "line_items": 0.99
+   }
+  },
+  "confidence": 0.99,
+  "model": "gpt-6.1-sol",
+  "attempts": 1,
+  "cost_usd": 0.008066,
+  "latency_ms": 6232,
+  "created_at": "2026-11-12T11:26:25.793150"
+ },
+ "approved_data": {
+  "doc_type": "receipt",
+  "vendor_name": "Bean & Byte Cafe",
+  "vendor_tax_id": "TAX-837307",
+  "invoice_number": null,
+  "invoice_date": "2026-07-23",
+  "due_date": null,
+  "currency": "USD",
+  "subtotal": 2719.97,
+  "tax": 0.0,
+  "total": 2719.97,
+  "line_items": [
+   {
+    "description": "Club sandwich",
+    "quantity": 4.0,
+    "unit_price": 397.65,
+    "amount": 1590.6
+   },
+   {
+    "description": "Team lunch platter",
+    "quantity": 4.0,
+    "unit_price": 137.63,
+    "amount": 550.52
+   },
+   {
+    "description": "Cappuccino",
+    "quantity": 2.0,
+    "unit_price": 144.58,
+    "amount": 289.16
+   },
+   {
+    "description": "Mineral water",
+    "quantity": 1.0,
+    "unit_price": 289.69,
+    "amount": 289.69
+   }
+  ],
+  "category": "Meals & Entertainment",
+  "field_confidence": {
+   "vendor_name": 0.99,
+   "invoice_number": 0.99,
+   "invoice_date": 0.99,
+   "total": 0.99,
+   "line_items": 0.99
+  }
+ },
+ "issues": []
+}

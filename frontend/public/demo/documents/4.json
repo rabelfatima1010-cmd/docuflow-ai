@@ -1,0 +1,105 @@
+{
+ "id": 4,
+ "filename": "sample_004.png",
+ "source": "upload",
+ "status": "approved",
+ "vendor_name": "Pixel Hardware Co",
+ "invoice_date": "2026-08-27",
+ "total": 1741.6,
+ "currency": "GBP",
+ "category": "Hardware & Equipment",
+ "confidence": 1.0,
+ "error": null,
+ "created_at": "2026-11-12T11:25:33.180358",
+ "mime_type": "image/png",
+ "extraction": {
+  "version": 1,
+  "data": {
+   "doc_type": "invoice",
+   "vendor_name": "Pixel Hardware Co",
+   "vendor_tax_id": "TAX-538433",
+   "invoice_number": "INV-2026-8424",
+   "invoice_date": "2026-08-27",
+   "due_date": "2026-10-11",
+   "currency": "GBP",
+   "subtotal": 1583.27,
+   "tax": 158.33,
+   "total": 1741.6,
+   "line_items": [
+    {
+     "description": "USB-C dock",
+     "quantity": 2.0,
+     "unit_price": 35.5,
+     "amount": 71.0
+    },
+    {
+     "description": "27in monitor",
+     "quantity": 3.0,
+     "unit_price": 211.5,
+     "amount": 634.5
+    },
+    {
+     "description": "Laptop stand",
+     "quantity": 3.0,
+     "unit_price": 292.59,
+     "amount": 877.77
+    }
+   ],
+   "category": "Hardware & Equipment",
+   "field_confidence": {
+    "vendor_name": 1.0,
+    "invoice_number": 1.0,
+    "invoice_date": 1.0,
+    "total": 1.0,
+    "line_items": 1.0
+   }
+  },
+  "confidence": 1.0,
+  "model": "gpt-6.1-sol",
+  "attempts": 1,
+  "cost_usd": 0.009802,
+  "latency_ms": 7473,
+  "created_at": "2026-11-12T11:25:42.613450"
+ },
+ "approved_data": {
+  "doc_type": "invoice",
+  "vendor_name": "Pixel Hardware Co",
+  "vendor_tax_id": "TAX-538433",
+  "invoice_number": "INV-2026-8424",
+  "invoice_date": "2026-08-27",
+  "due_date": "2026-10-11",
+  "currency": "GBP",
+  "subtotal": 1583.27,
+  "tax": 158.33,
+  "total": 1741.6,
+  "line_items": [
+   {
+    "description": "USB-C dock",
+    "quantity": 2.0,
+    "unit_price": 35.5,
+    "amount": 71.0
+   },
+   {
+    "description": "27in monitor",
+    "quantity": 3.0,
+    "unit_price": 211.5,
+    "amount": 634.5
+   },
+   {
+    "description": "Laptop stand",
+    "quantity": 3.0,
+    "unit_price": 292.59,
+    "amount": 877.77
+   }
+  ],
+  "category": "Hardware & Equipment",
+  "field_confidence": {
+   "vendor_name": 1.0,
+   "invoice_number": 1.0,
+   "invoice_date": 1.0,
+   "total": 1.0,
+   "line_items": 1.0
+  }
+ },
+ "issues": []
+}

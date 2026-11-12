@@ -1,0 +1,93 @@
+{
+ "id": 10,
+ "filename": "sample_010.png",
+ "source": "upload",
+ "status": "approved",
+ "vendor_name": "BrightGrid Electric",
+ "invoice_date": "2026-08-31",
+ "total": 32689.71,
+ "currency": "PKR",
+ "category": "Utilities",
+ "confidence": 1.0,
+ "error": null,
+ "created_at": "2026-11-12T11:25:48.647928",
+ "mime_type": "image/png",
+ "extraction": {
+  "version": 1,
+  "data": {
+   "doc_type": "invoice",
+   "vendor_name": "BrightGrid Electric",
+   "vendor_tax_id": "TAX-825674",
+   "invoice_number": "INV-2026-2889",
+   "invoice_date": "2026-08-31",
+   "due_date": "2026-09-14",
+   "currency": "PKR",
+   "subtotal": 29717.92,
+   "tax": 2971.79,
+   "total": 32689.71,
+   "line_items": [
+    {
+     "description": "Meter service fee",
+     "quantity": 4.0,
+     "unit_price": 6340.27,
+     "amount": 25361.08
+    },
+    {
+     "description": "Electricity usage",
+     "quantity": 2.0,
+     "unit_price": 2178.42,
+     "amount": 4356.84
+    }
+   ],
+   "category": "Utilities",
+   "field_confidence": {
+    "vendor_name": 1.0,
+    "invoice_number": 1.0,
+    "invoice_date": 1.0,
+    "total": 1.0,
+    "line_items": 1.0
+   }
+  },
+  "confidence": 1.0,
+  "model": "gpt-6.1-sol",
+  "attempts": 1,
+  "cost_usd": 0.009652,
+  "latency_ms": 6792,
+  "created_at": "2026-11-12T11:25:55.611598"
+ },
+ "approved_data": {
+  "doc_type": "invoice",
+  "vendor_name": "BrightGrid Electric",
+  "vendor_tax_id": "TAX-825674",
+  "invoice_number": "INV-2026-2889",
+  "invoice_date": "2026-08-31",
+  "due_date": "2026-09-14",
+  "currency": "PKR",
+  "subtotal": 29717.92,
+  "tax": 2971.79,
+  "total": 32689.71,
+  "line_items": [
+   {
+    "description": "Meter service fee",
+    "quantity": 4.0,
+    "unit_price": 6340.27,
+    "amount": 25361.08
+   },
+   {
+    "description": "Electricity usage",
+    "quantity": 2.0,
+    "unit_price": 2178.42,
+    "amount": 4356.84
+   }
+  ],
+  "category": "Utilities",
+  "field_confidence": {
+   "vendor_name": 1.0,
+   "invoice_number": 1.0,
+   "invoice_date": 1.0,
+   "total": 1.0,
+   "line_items": 1.0
+  }
+ },
+ "issues": []
+}

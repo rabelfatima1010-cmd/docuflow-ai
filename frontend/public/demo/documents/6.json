@@ -1,0 +1,93 @@
+{
+ "id": 6,
+ "filename": "sample_006.png",
+ "source": "upload",
+ "status": "approved",
+ "vendor_name": "SwiftShip Couriers",
+ "invoice_date": "2026-06-27",
+ "total": 14104.86,
+ "currency": "PKR",
+ "category": "Shipping & Logistics",
+ "confidence": 1.0,
+ "error": null,
+ "created_at": "2026-11-12T11:25:48.516942",
+ "mime_type": "image/png",
+ "extraction": {
+  "version": 1,
+  "data": {
+   "doc_type": "invoice",
+   "vendor_name": "SwiftShip Couriers",
+   "vendor_tax_id": null,
+   "invoice_number": "INV-2026-8564",
+   "invoice_date": "2026-06-27",
+   "due_date": "2026-07-11",
+   "currency": "PKR",
+   "subtotal": 13433.2,
+   "tax": 671.66,
+   "total": 14104.86,
+   "line_items": [
+    {
+     "description": "Express parcel",
+     "quantity": 4.0,
+     "unit_price": 1320.25,
+     "amount": 5281.0
+    },
+    {
+     "description": "Insurance cover",
+     "quantity": 3.0,
+     "unit_price": 2717.4,
+     "amount": 8152.2
+    }
+   ],
+   "category": "Shipping & Logistics",
+   "field_confidence": {
+    "vendor_name": 1.0,
+    "invoice_number": 1.0,
+    "invoice_date": 1.0,
+    "total": 1.0,
+    "line_items": 1.0
+   }
+  },
+  "confidence": 1.0,
+  "model": "gpt-6.1-sol",
+  "attempts": 1,
+  "cost_usd": 0.009602,
+  "latency_ms": 7677,
+  "created_at": "2026-11-12T11:25:56.319148"
+ },
+ "approved_data": {
+  "doc_type": "invoice",
+  "vendor_name": "SwiftShip Couriers",
+  "vendor_tax_id": null,
+  "invoice_number": "INV-2026-8564",
+  "invoice_date": "2026-06-27",
+  "due_date": "2026-07-11",
+  "currency": "PKR",
+  "subtotal": 13433.2,
+  "tax": 671.66,
+  "total": 14104.86,
+  "line_items": [
+   {
+    "description": "Express parcel",
+    "quantity": 4.0,
+    "unit_price": 1320.25,
+    "amount": 5281.0
+   },
+   {
+    "description": "Insurance cover",
+    "quantity": 3.0,
+    "unit_price": 2717.4,
+    "amount": 8152.2
+   }
+  ],
+  "category": "Shipping & Logistics",
+  "field_confidence": {
+   "vendor_name": 1.0,
+   "invoice_number": 1.0,
+   "invoice_date": 1.0,
+   "total": 1.0,
+   "line_items": 1.0
+  }
+ },
+ "issues": []
+}

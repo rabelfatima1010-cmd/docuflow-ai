@@ -1,0 +1,62 @@
+{
+ "id": 14,
+ "filename": "sample_014.png",
+ "source": "upload",
+ "status": "needs_review",
+ "vendor_name": "CloudNest Hosting LLC",
+ "invoice_date": "2026-06-26",
+ "total": 430.34,
+ "currency": "GBP",
+ "category": "Software & SaaS",
+ "confidence": 0.4,
+ "error": null,
+ "created_at": "2026-11-12T11:26:04.019237",
+ "mime_type": "image/png",
+ "extraction": {
+  "version": 1,
+  "data": {
+   "doc_type": "invoice",
+   "vendor_name": "CloudNest Hosting LLC",
+   "vendor_tax_id": "TAX-856888",
+   "invoice_number": "INV-2026-2389",
+   "invoice_date": "2026-06-26",
+   "due_date": "2026-08-10",
+   "currency": "GBP",
+   "subtotal": 385.56,
+   "tax": 19.28,
+   "total": 430.34,
+   "line_items": [
+    {
+     "description": "SSL certificate",
+     "quantity": 2.0,
+     "unit_price": 192.78,
+     "amount": 385.56
+    }
+   ],
+   "category": "Software & SaaS",
+   "field_confidence": {
+    "vendor_name": 1.0,
+    "invoice_number": 1.0,
+    "invoice_date": 1.0,
+    "total": 0.65,
+    "line_items": 1.0
+   }
+  },
+  "confidence": 0.4,
+  "model": "gpt-6.1-sol",
+  "attempts": 3,
+  "cost_usd": 0.028982,
+  "latency_ms": 18245,
+  "created_at": "2026-11-12T11:26:22.434267"
+ },
+ "approved_data": null,
+ "issues": [
+  {
+   "rule": "totals_math",
+   "field": "total",
+   "message": "Subtotal 385.56 + tax 19.28 = 404.84, but total is 430.34.",
+   "severity": "error",
+   "id": 2
+  }
+ ]
+}

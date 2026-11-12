@@ -1,0 +1,117 @@
+{
+ "id": 7,
+ "filename": "sample_007.png",
+ "source": "upload",
+ "status": "approved",
+ "vendor_name": "PaperTrail Office Supplies",
+ "invoice_date": "2026-10-09",
+ "total": 1901.05,
+ "currency": "EUR",
+ "category": "Office Supplies",
+ "confidence": 0.99,
+ "error": null,
+ "created_at": "2026-11-12T11:25:48.539391",
+ "mime_type": "image/png",
+ "extraction": {
+  "version": 1,
+  "data": {
+   "doc_type": "invoice",
+   "vendor_name": "PaperTrail Office Supplies",
+   "vendor_tax_id": "TAX-539297",
+   "invoice_number": "INV-2026-3243",
+   "invoice_date": "2026-10-09",
+   "due_date": "2026-11-08",
+   "currency": "EUR",
+   "subtotal": 1810.52,
+   "tax": 90.53,
+   "total": 1901.05,
+   "line_items": [
+    {
+     "description": "Ballpoint pens (50)",
+     "quantity": 4.0,
+     "unit_price": 383.22,
+     "amount": 1532.88
+    },
+    {
+     "description": "Sticky notes",
+     "quantity": 2.0,
+     "unit_price": 35.94,
+     "amount": 71.88
+    },
+    {
+     "description": "Toner cartridge",
+     "quantity": 2.0,
+     "unit_price": 95.09,
+     "amount": 190.18
+    },
+    {
+     "description": "A4 paper (box)",
+     "quantity": 2.0,
+     "unit_price": 7.79,
+     "amount": 15.58
+    }
+   ],
+   "category": "Office Supplies",
+   "field_confidence": {
+    "vendor_name": 0.99,
+    "invoice_number": 0.99,
+    "invoice_date": 0.99,
+    "total": 0.99,
+    "line_items": 0.99
+   }
+  },
+  "confidence": 0.99,
+  "model": "gpt-6.1-sol",
+  "attempts": 1,
+  "cost_usd": 0.010242,
+  "latency_ms": 6969,
+  "created_at": "2026-11-12T11:25:55.685860"
+ },
+ "approved_data": {
+  "doc_type": "invoice",
+  "vendor_name": "PaperTrail Office Supplies",
+  "vendor_tax_id": "TAX-539297",
+  "invoice_number": "INV-2026-3243",
+  "invoice_date": "2026-10-09",
+  "due_date": "2026-11-08",
+  "currency": "EUR",
+  "subtotal": 1810.52,
+  "tax": 90.53,
+  "total": 1901.05,
+  "line_items": [
+   {
+    "description": "Ballpoint pens (50)",
+    "quantity": 4.0,
+    "unit_price": 383.22,
+    "amount": 1532.88
+   },
+   {
+    "description": "Sticky notes",
+    "quantity": 2.0,
+    "unit_price": 35.94,
+    "amount": 71.88
+   },
+   {
+    "description": "Toner cartridge",
+    "quantity": 2.0,
+    "unit_price": 95.09,
+    "amount": 190.18
+   },
+   {
+    "description": "A4 paper (box)",
+    "quantity": 2.0,
+    "unit_price": 7.79,
+    "amount": 15.58
+   }
+  ],
+  "category": "Office Supplies",
+  "field_confidence": {
+   "vendor_name": 0.99,
+   "invoice_number": 0.99,
+   "invoice_date": 0.99,
+   "total": 0.99,
+   "line_items": 0.99
+  }
+ },
+ "issues": []
+}

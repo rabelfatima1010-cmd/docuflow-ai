@@ -1,0 +1,113 @@
+{
+ "counts": {
+  "approved": 17,
+  "needs_review": 3
+ },
+ "total_documents": 20,
+ "approved_total": 182249.78,
+ "currencies": {
+  "EUR": 5,
+  "GBP": 2,
+  "USD": 5,
+  "PKR": 5
+ },
+ "auto_approve_rate": 0.85,
+ "avg_cost_usd": 0.01128,
+ "total_cost_usd": 0.2255,
+ "avg_latency_ms": 7994,
+ "spend_by_month": [
+  {
+   "month": "2026-01",
+   "total": 136.66
+  },
+  {
+   "month": "2026-03",
+   "total": 1078.47
+  },
+  {
+   "month": "2026-04",
+   "total": 53487.84
+  },
+  {
+   "month": "2026-06",
+   "total": 17283.87
+  },
+  {
+   "month": "2026-07",
+   "total": 19749.37
+  },
+  {
+   "month": "2026-08",
+   "total": 35681.46
+  },
+  {
+   "month": "2026-09",
+   "total": 50207.74
+  },
+  {
+   "month": "2026-10",
+   "total": 4624.37
+  }
+ ],
+ "spend_by_category": [
+  {
+   "name": "Hardware & Equipment",
+   "total": 58840.82
+  },
+  {
+   "name": "Professional Services",
+   "total": 49641.36
+  },
+  {
+   "name": "Utilities",
+   "total": 33465.15
+  },
+  {
+   "name": "Shipping & Logistics",
+   "total": 31134.26
+  },
+  {
+   "name": "Office Supplies",
+   "total": 5198.07
+  },
+  {
+   "name": "Meals & Entertainment",
+   "total": 2719.97
+  },
+  {
+   "name": "Software & SaaS",
+   "total": 1250.15
+  }
+ ],
+ "top_vendors": [
+  {
+   "name": "Pixel Hardware Co",
+   "total": 58840.82
+  },
+  {
+   "name": "Northwind Legal Partners",
+   "total": 49641.36
+  },
+  {
+   "name": "BrightGrid Electric",
+   "total": 33465.15
+  },
+  {
+   "name": "SwiftShip Couriers",
+   "total": 31134.26
+  },
+  {
+   "name": "PaperTrail Office Supplies",
+   "total": 5198.07
+  },
+  {
+   "name": "Bean & Byte Cafe",
+   "total": 2719.97
+  },
+  {
+   "name": "CloudNest Hosting LLC",
+   "total": 1250.15
+  }
+ ],
+ "anomalies": []
+}

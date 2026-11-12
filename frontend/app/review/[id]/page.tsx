@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ConfidenceBar, StatusBadge } from "@/components/StatusBadge";
-import { api, money, type DocumentDetail, type Invoice, type LineItem } from "@/lib/api";
+import { api, DEMO, money, type DocumentDetail, type Invoice, type LineItem } from "@/lib/api";
 
 const num = (v: string): number | null => (v.trim() === "" ? null : Number(v));
 
@@ -302,9 +302,11 @@ export default function ReviewPage() {
                 <button className="btn btn-primary" disabled={busy || processing} onClick={approve} title="Ctrl+Enter">
                   ✓ Approve {doc.status === "needs_review" ? "& next" : ""}
                 </button>
-                <button className="btn" disabled={busy || processing} onClick={() => act(() => api.reprocess(id))}>
-                  ↻ Re-run AI
-                </button>
+                {!DEMO && (
+                  <button className="btn" disabled={busy || processing} onClick={() => act(() => api.reprocess(id))}>
+                    ↻ Re-run AI
+                  </button>
+                )}
                 <button className="btn btn-danger ml-auto" disabled={busy} onClick={() => act(() => api.reject(id), "/")}>
                   Reject
                 </button>
