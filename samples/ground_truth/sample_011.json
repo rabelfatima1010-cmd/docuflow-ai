@@ -1,0 +1,28 @@
+{
+  "doc_type": "invoice",
+  "vendor_name": "Pixel Hardware Co",
+  "vendor_tax_id": null,
+  "invoice_number": "INV-2026-3401",
+  "invoice_date": "2026-09-28",
+  "due_date": "2026-10-28",
+  "currency": "USD",
+  "subtotal": 279.39,
+  "tax": 27.94,
+  "total": 307.33,
+  "line_items": [
+    {
+      "description": "USB-C dock",
+      "quantity": 1.0,
+      "unit_price": 279.39,
+      "amount": 279.39
+    }
+  ],
+  "category": "Hardware & Equipment",
+  "field_confidence": {
+    "vendor_name": 0.98,
+    "invoice_number": 0.97,
+    "invoice_date": 0.96,
+    "total": 0.98,
+    "line_items": 0.95
+  }
+}

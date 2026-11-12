@@ -1,0 +1,56 @@
+from functools import lru_cache
+from pathlib import Path
+from typing import Literal
+
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
+BACKEND_DIR = Path(__file__).resolve().parent.parent
+
+
+class Settings(BaseSettings):
+    model_config = SettingsConfigDict(env_file=BACKEND_DIR / ".env", extra="ignore")
+
+    # Storage
+    database_url: str = f"sqlite:///{(BACKEND_DIR / 'data' / 'docuflow.db').as_posix()}"
+    storage_dir: Path = BACKEND_DIR / "data" / "uploads"
+    max_upload_mb: int = 20
+
+    # Extraction
+    extractor: Literal["claude", "openai", "mock"] = "claude"
+    # API keys: read from backend/.env (or the environment) and passed to the SDK clients
+    anthropic_api_key: str | None = None
+    openai_api_key: str | None = None
+    # Claude
+    llm_model: str = "claude-opus-5-5"
+    llm_effort: Literal["low", "medium", "high", "xhigh", "max"] = "medium"
+    llm_fallbacks: bool = True  # server-side refusal fallback (beta)
+    # OpenAI
+    openai_model: str = "gpt-6.1-sol"
+    openai_reasoning_effort: Literal["none", "minimal", "low", "medium", "high", "xhigh", "max"] | None = None
+    max_correction_attempts: int = 2
+    auto_approve_threshold: float = 0.90
+    use_pdf_text_mode: bool = True  # PDFs with a real text layer go as text (cheaper)
+
+    # Queue: leave empty to process in-process (dev); set for Redis + RQ workers
+    redis_url: str | None = None
+
+    # API
+    cors_origins: str = "http://localhost:3000"
+    webhook_secret: str | None = None
+
+    # Exports
+    export_on_approve: bool = True
+    google_service_account_file: str | None = None
+    google_sheet_id: str | None = None
+    google_worksheet: str = "Invoices"
+    n8n_export_webhook_url: str | None = None
+
+
+    @property
+    def active_model(self) -> str:
+        return {"claude": self.llm_model, "openai": self.openai_model}.get(self.extractor, "mock")
+
+
+@lru_cache
+def get_settings() -> Settings:
+    return Settings()

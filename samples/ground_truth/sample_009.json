@@ -1,0 +1,28 @@
+{
+  "doc_type": "receipt",
+  "vendor_name": "Northwind Legal Partners",
+  "vendor_tax_id": null,
+  "invoice_number": null,
+  "invoice_date": "2026-10-18",
+  "due_date": null,
+  "currency": "USD",
+  "subtotal": 379.73,
+  "tax": 0.0,
+  "total": 379.73,
+  "line_items": [
+    {
+      "description": "Filing fees",
+      "quantity": 1.0,
+      "unit_price": 379.73,
+      "amount": 379.73
+    }
+  ],
+  "category": "Professional Services",
+  "field_confidence": {
+    "vendor_name": 0.98,
+    "invoice_number": 0.9,
+    "invoice_date": 0.96,
+    "total": 0.98,
+    "line_items": 0.95
+  }
+}

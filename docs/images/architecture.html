@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>DocuFlow AI architecture</title>
+<style>
+  :root { --bg:#121211; --card:#1a1a19; --border:#33332f; --text:#f0efec; --muted:#a9a79d; --accent:#3987e5; --good:#6fd08c; --warn:#f0c060; }
+  * { box-sizing:border-box; margin:0; }
+  body { width:1600px; height:1200px; background:var(--bg); color:var(--text); font-family:"Segoe UI",system-ui,sans-serif; padding:64px 80px; display:flex; flex-direction:column; justify-content:center; }
+  h1 { font-size:46px; font-weight:700; }
+  h1 span { color:var(--accent); }
+  .sub { color:var(--muted); font-size:22px; margin-top:8px; }
+  .row { display:flex; align-items:stretch; gap:0; margin-top:56px; }
+  .col { display:flex; flex-direction:column; gap:16px; justify-content:center; }
+  .box { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:18px 22px; font-size:20px; }
+  .box b { display:block; font-size:22px; margin-bottom:4px; }
+  .box small { color:var(--muted); font-size:16px; }
+  .arrow { width:60px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:34px; }
+  .agent { border:2px solid var(--accent); border-radius:18px; padding:22px; background:#16202c; width:560px; }
+  .agent h2 { font-size:24px; color:var(--accent); margin-bottom:14px; }
+  .step { display:flex; gap:14px; align-items:flex-start; padding:9px 0; font-size:19px; border-top:1px solid #24364b; }
+  .step:first-of-type { border-top:none; }
+  .n { flex:0 0 30px; height:30px; border-radius:50%; background:var(--accent); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; }
+  .step small { display:block; color:var(--muted); font-size:15px; margin-top:2px; }
+  .loop { color:var(--warn); font-size:16px; margin-top:10px; }
+  .w260 { width:260px; }
+  .ok { border-color:var(--good); }
+  .rv { border-color:var(--warn); }
+  .stack { margin-top:56px; display:flex; flex-wrap:wrap; gap:12px; }
+  .chip { border:1px solid var(--border); border-radius:999px; padding:8px 16px; font-size:17px; color:var(--muted); background:var(--card); }
+</style>
+</head>
+<body>
+  <h1>DocuFlow <span>AI</span>: how it works</h1>
+  <div class="sub">An AI agent that turns invoices and receipts into checked accounting data</div>
+
+  <div class="row">
+    <div class="col w260">
+      <div class="box"><b>Web upload</b><small>PDF · photo · scan</small></div>
+      <div class="box"><b>Gmail</b><small>via n8n</small></div>
+      <div class="box"><b>Google Drive</b><small>via n8n</small></div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="agent">
+      <h2>Agent pipeline</h2>
+      <div class="step"><div class="n">1</div><div>Clean up image<small>straighten, contrast, PDF text layer</small></div></div>
+      <div class="step"><div class="n">2</div><div>Extract with AI vision<small>Claude or OpenAI GPT · validated JSON schema</small></div></div>
+      <div class="step"><div class="n">3</div><div>Validate<small>line items · subtotal + tax · dates · currency · duplicates</small></div></div>
+      <div class="step"><div class="n">4</div><div>Self-correct<small>re-read the page with the exact errors (up to 2×)</small></div></div>
+      <div class="step"><div class="n">5</div><div>Categorize<small>learned vendor default → AI → keyword rules</small></div></div>
+      <div class="step"><div class="n">6</div><div>Score confidence &amp; route</div></div>
+      <div class="loop">↻ steps 2–4 repeat until the numbers agree</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="col w260">
+      <div class="box ok"><b>Auto-approved</b><small>high confidence, all checks pass</small></div>
+      <div class="box rv"><b>Human review</b><small>flagged fields highlighted; corrections are learned</small></div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="col" style="width:230px">
+      <div class="box"><b>Google Sheets</b></div>
+      <div class="box"><b>QuickBooks / Xero</b><small>via n8n</small></div>
+      <div class="box"><b>CSV</b></div>
+      <div class="box"><b>Dashboard</b><small>spend · alerts</small></div>
+    </div>
+  </div>
+
+  <div class="stack">
+    <span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">OpenAI / Claude vision</span>
+    <span class="chip">Pydantic structured outputs</span><span class="chip">OpenCV</span><span class="chip">PostgreSQL</span>
+    <span class="chip">Redis + RQ workers</span><span class="chip">Next.js</span><span class="chip">n8n</span><span class="chip">Docker</span>
+  </div>
+</body>
+</html>

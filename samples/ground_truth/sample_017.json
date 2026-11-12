@@ -1,0 +1,28 @@
+{
+  "doc_type": "invoice",
+  "vendor_name": "CloudNest Hosting LLC",
+  "vendor_tax_id": null,
+  "invoice_number": "INV-2026-2971",
+  "invoice_date": "2026-08-31",
+  "due_date": "2026-10-15",
+  "currency": "EUR",
+  "subtotal": 1068.5,
+  "tax": 181.65,
+  "total": 1250.15,
+  "line_items": [
+    {
+      "description": "Backup storage 500GB",
+      "quantity": 5.0,
+      "unit_price": 213.7,
+      "amount": 1068.5
+    }
+  ],
+  "category": "Software & SaaS",
+  "field_confidence": {
+    "vendor_name": 0.98,
+    "invoice_number": 0.97,
+    "invoice_date": 0.96,
+    "total": 0.98,
+    "line_items": 0.95
+  }
+}

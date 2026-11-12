@@ -1,0 +1,28 @@
+{
+  "doc_type": "invoice",
+  "vendor_name": "CloudNest Hosting LLC",
+  "vendor_tax_id": "TAX-856888",
+  "invoice_number": "INV-2026-2389",
+  "invoice_date": "2026-06-26",
+  "due_date": "2026-08-10",
+  "currency": "GBP",
+  "subtotal": 385.56,
+  "tax": 19.28,
+  "total": 430.34,
+  "line_items": [
+    {
+      "description": "SSL certificate",
+      "quantity": 2.0,
+      "unit_price": 192.78,
+      "amount": 385.56
+    }
+  ],
+  "category": "Software & SaaS",
+  "field_confidence": {
+    "vendor_name": 0.98,
+    "invoice_number": 0.97,
+    "invoice_date": 0.96,
+    "total": 0.98,
+    "line_items": 0.95
+  }
+}

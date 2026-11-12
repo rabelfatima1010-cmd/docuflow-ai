@@ -1,0 +1,51 @@
+{
+  "name": "DocuFlow - Approved invoice export",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "docuflow-approved",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "name": "Approved invoice webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0],
+      "webhookId": "docuflow-approved"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": { "__rl": true, "mode": "url", "value": "PASTE_YOUR_GOOGLE_SHEET_URL" },
+        "sheetName": { "__rl": true, "mode": "name", "value": "Invoices" },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Document": "={{ $json.body.document_id }}",
+            "Vendor": "={{ $json.body.vendor_name }}",
+            "Invoice #": "={{ $json.body.invoice_number }}",
+            "Date": "={{ $json.body.invoice_date }}",
+            "Due": "={{ $json.body.due_date }}",
+            "Currency": "={{ $json.body.currency }}",
+            "Subtotal": "={{ $json.body.subtotal }}",
+            "Tax": "={{ $json.body.tax }}",
+            "Total": "={{ $json.body.total }}",
+            "Category": "={{ $json.body.category }}",
+            "Source": "={{ $json.body.source }}"
+          }
+        },
+        "options": {}
+      },
+      "name": "Append to Google Sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [260, 0]
+    }
+  ],
+  "connections": {
+    "Approved invoice webhook": { "main": [[{ "node": "Append to Google Sheet", "type": "main", "index": 0 }]] }
+  },
+  "settings": {},
+  "active": false
+}

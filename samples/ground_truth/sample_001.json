@@ -1,0 +1,28 @@
+{
+  "doc_type": "invoice",
+  "vendor_name": "Northwind Legal Partners",
+  "vendor_tax_id": "TAX-173248",
+  "invoice_number": "INV-2026-9779",
+  "invoice_date": "2026-01-25",
+  "due_date": "2026-02-08",
+  "currency": "EUR",
+  "subtotal": 130.15,
+  "tax": 6.51,
+  "total": 136.66,
+  "line_items": [
+    {
+      "description": "Consultation call",
+      "quantity": 5.0,
+      "unit_price": 26.03,
+      "amount": 130.15
+    }
+  ],
+  "category": "Professional Services",
+  "field_confidence": {
+    "vendor_name": 0.98,
+    "invoice_number": 0.97,
+    "invoice_date": 0.96,
+    "total": 0.98,
+    "line_items": 0.95
+  }
+}

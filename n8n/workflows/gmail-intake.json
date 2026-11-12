@@ -1,0 +1,57 @@
+{
+  "name": "DocuFlow - Gmail invoice intake",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": { "item": [{ "mode": "everyMinute" }] },
+        "simple": false,
+        "filters": { "q": "has:attachment (invoice OR receipt OR bill) -label:docuflow-processed" },
+        "options": { "downloadAttachments": true }
+      },
+      "name": "Gmail Trigger",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.DOCUFLOW_API_URL || 'http://api:8000' }}/api/webhooks/ingest",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [{ "name": "X-Webhook-Secret", "value": "={{ $env.DOCUFLOW_WEBHOOK_SECRET }}" }]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            { "parameterType": "formBinaryData", "name": "files", "inputDataFieldName": "attachment_0" },
+            { "name": "source", "value": "email" }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Send to DocuFlow",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [260, 0]
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $('Gmail Trigger').item.json.id }}",
+        "labelIds": ["docuflow-processed"]
+      },
+      "name": "Label as processed",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [520, 0]
+    }
+  ],
+  "connections": {
+    "Gmail Trigger": { "main": [[{ "node": "Send to DocuFlow", "type": "main", "index": 0 }]] },
+    "Send to DocuFlow": { "main": [[{ "node": "Label as processed", "type": "main", "index": 0 }]] }
+  },
+  "settings": {},
+  "active": false
+}

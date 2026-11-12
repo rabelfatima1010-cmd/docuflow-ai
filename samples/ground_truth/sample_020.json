@@ -1,0 +1,46 @@
+{
+  "doc_type": "receipt",
+  "vendor_name": "Bean & Byte Cafe",
+  "vendor_tax_id": "TAX-837307",
+  "invoice_number": null,
+  "invoice_date": "2026-07-23",
+  "due_date": null,
+  "currency": "USD",
+  "subtotal": 2719.97,
+  "tax": 0.0,
+  "total": 2719.97,
+  "line_items": [
+    {
+      "description": "Club sandwich",
+      "quantity": 4.0,
+      "unit_price": 397.65,
+      "amount": 1590.6
+    },
+    {
+      "description": "Team lunch platter",
+      "quantity": 4.0,
+      "unit_price": 137.63,
+      "amount": 550.52
+    },
+    {
+      "description": "Cappuccino",
+      "quantity": 2.0,
+      "unit_price": 144.58,
+      "amount": 289.16
+    },
+    {
+      "description": "Mineral water",
+      "quantity": 1.0,
+      "unit_price": 289.69,
+      "amount": 289.69
+    }
+  ],
+  "category": "Meals & Entertainment",
+  "field_confidence": {
+    "vendor_name": 0.98,
+    "invoice_number": 0.9,
+    "invoice_date": 0.96,
+    "total": 0.98,
+    "line_items": 0.95
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "doc_type": "receipt",
+  "vendor_name": "PaperTrail Office Supplies",
+  "vendor_tax_id": "TAX-239643",
+  "invoice_number": null,
+  "invoice_date": "2026-10-17",
+  "due_date": null,
+  "currency": "GBP",
+  "subtotal": 1896.2,
+  "tax": 322.35,
+  "total": 2218.55,
+  "line_items": [
+    {
+      "description": "Toner cartridge",
+      "quantity": 5.0,
+      "unit_price": 379.24,
+      "amount": 1896.2
+    }
+  ],
+  "category": "Office Supplies",
+  "field_confidence": {
+    "vendor_name": 0.98,
+    "invoice_number": 0.9,
+    "invoice_date": 0.96,
+    "total": 0.98,
+    "line_items": 0.95
+  }
+}

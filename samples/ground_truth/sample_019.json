@@ -1,0 +1,46 @@
+{
+  "doc_type": "invoice",
+  "vendor_name": "Pixel Hardware Co",
+  "vendor_tax_id": "TAX-243921",
+  "invoice_number": "INV-2026-4319",
+  "invoice_date": "2026-05-13",
+  "due_date": "2026-06-27",
+  "currency": "EUR",
+  "subtotal": 1756.54,
+  "tax": 87.83,
+  "total": 1844.37,
+  "line_items": [
+    {
+      "description": "Mechanical keyboard",
+      "quantity": 4.0,
+      "unit_price": 128.44,
+      "amount": 513.76
+    },
+    {
+      "description": "Laptop stand",
+      "quantity": 2.0,
+      "unit_price": 173.05,
+      "amount": 346.1
+    },
+    {
+      "description": "27in monitor",
+      "quantity": 2.0,
+      "unit_price": 268.78,
+      "amount": 537.56
+    },
+    {
+      "description": "USB-C dock",
+      "quantity": 1.0,
+      "unit_price": 359.12,
+      "amount": 359.12
+    }
+  ],
+  "category": "Hardware & Equipment",
+  "field_confidence": {
+    "vendor_name": 0.98,
+    "invoice_number": 0.97,
+    "invoice_date": 0.96,
+    "total": 0.98,
+    "line_items": 0.95
+  }
+}

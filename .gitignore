@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Secrets and local data
+.env
+.env.*
+!.env.example
+*.service-account.json
+backend/data/
+backend/data-*/
+eval/results/
+eval/dataset/
+
+# Local tool settings
+.claude/
+.vscode/
+
+# Node
+node_modules/
+.next/
+next-env.d.ts
+*.tsbuildinfo

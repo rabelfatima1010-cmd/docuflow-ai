@@ -1,0 +1,28 @@
+{
+  "doc_type": "invoice",
+  "vendor_name": "SwiftShip Couriers",
+  "vendor_tax_id": null,
+  "invoice_number": "INV-2026-4612",
+  "invoice_date": "2026-07-06",
+  "due_date": "2026-07-20",
+  "currency": "PKR",
+  "subtotal": 16218.48,
+  "tax": 810.92,
+  "total": 17029.4,
+  "line_items": [
+    {
+      "description": "Express parcel",
+      "quantity": 4.0,
+      "unit_price": 4054.62,
+      "amount": 16218.48
+    }
+  ],
+  "category": "Shipping & Logistics",
+  "field_confidence": {
+    "vendor_name": 0.98,
+    "invoice_number": 0.97,
+    "invoice_date": 0.96,
+    "total": 0.98,
+    "line_items": 0.95
+  }
+}

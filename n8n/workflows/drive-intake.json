@@ -1,0 +1,58 @@
+{
+  "name": "DocuFlow - Google Drive folder intake",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": { "item": [{ "mode": "everyMinute" }] },
+        "triggerOn": "specificFolder",
+        "folderToWatch": { "__rl": true, "mode": "url", "value": "PASTE_YOUR_DRIVE_FOLDER_URL" },
+        "event": "fileCreated",
+        "options": {}
+      },
+      "name": "Drive Trigger",
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": { "__rl": true, "mode": "id", "value": "={{ $json.id }}" },
+        "options": {}
+      },
+      "name": "Download file",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [240, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.DOCUFLOW_API_URL || 'http://api:8000' }}/api/webhooks/ingest",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [{ "name": "X-Webhook-Secret", "value": "={{ $env.DOCUFLOW_WEBHOOK_SECRET }}" }]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            { "parameterType": "formBinaryData", "name": "files", "inputDataFieldName": "data" },
+            { "name": "source", "value": "drive" }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Send to DocuFlow",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [480, 0]
+    }
+  ],
+  "connections": {
+    "Drive Trigger": { "main": [[{ "node": "Download file", "type": "main", "index": 0 }]] },
+    "Download file": { "main": [[{ "node": "Send to DocuFlow", "type": "main", "index": 0 }]] }
+  },
+  "settings": {},
+  "active": false
+}

@@ -1,0 +1,34 @@
+{
+  "doc_type": "invoice",
+  "vendor_name": "BrightGrid Electric",
+  "vendor_tax_id": "TAX-825674",
+  "invoice_number": "INV-2026-2889",
+  "invoice_date": "2026-08-31",
+  "due_date": "2026-09-14",
+  "currency": "PKR",
+  "subtotal": 29717.92,
+  "tax": 2971.79,
+  "total": 32689.71,
+  "line_items": [
+    {
+      "description": "Meter service fee",
+      "quantity": 4.0,
+      "unit_price": 6340.27,
+      "amount": 25361.08
+    },
+    {
+      "description": "Electricity usage",
+      "quantity": 2.0,
+      "unit_price": 2178.42,
+      "amount": 4356.84
+    }
+  ],
+  "category": "Utilities",
+  "field_confidence": {
+    "vendor_name": 0.98,
+    "invoice_number": 0.97,
+    "invoice_date": 0.96,
+    "total": 0.98,
+    "line_items": 0.95
+  }
+}
