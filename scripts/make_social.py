@@ -15,7 +15,7 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parent.parent
 SOCIAL = ROOT / "docs" / "social"
 OUT = SOCIAL / "instagram"
-SLIDES = 8
+SLIDES = 9
 EDGE = [
     Path(r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"),
     Path(r"C:\Program Files\Microsoft\Edge\Application\msedge.exe"),
