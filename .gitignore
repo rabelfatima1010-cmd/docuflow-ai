@@ -23,3 +23,9 @@ node_modules/
 .next/
 next-env.d.ts
 *.tsbuildinfo
+
+# Built website (made by `npm run build` / the Dockerfile)
+frontend/out/
+
+# Non-secret frontend dev setting
+!frontend/.env.development

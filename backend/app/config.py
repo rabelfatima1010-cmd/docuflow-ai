@@ -5,6 +5,7 @@ from typing import Literal
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 BACKEND_DIR = Path(__file__).resolve().parent.parent
+REPO_DIR = BACKEND_DIR.parent
 
 
 class Settings(BaseSettings):
@@ -38,13 +39,25 @@ class Settings(BaseSettings):
     cors_origins: str = "http://localhost:3000"
     webhook_secret: str | None = None
 
+    # Public hosting safeguards
+    # When set, uploads and review actions need this code (header X-Access-Code). Browsing stays open.
+    upload_access_code: str | None = None
+    daily_upload_limit: int = 40  # AI runs per day for the whole site (uploads + re-runs); 0 = unlimited
+    per_ip_daily_limit: int = 10  # AI runs per day per visitor IP; 0 = unlimited
+    max_pdf_pages: int = 5
+
+    # Web UI: the built frontend (next build -> frontend/out) is served at "/" when present
+    frontend_dir: Path = REPO_DIR / "frontend" / "out"
+    # On startup, load the sample invoices from a real AI run into an empty database
+    seed_demo: bool = True
+    seed_dir: Path = REPO_DIR / "frontend" / "public" / "demo"
+
     # Exports
     export_on_approve: bool = True
     google_service_account_file: str | None = None
     google_sheet_id: str | None = None
     google_worksheet: str = "Invoices"
     n8n_export_webhook_url: str | None = None
-
 
     @property
     def active_model(self) -> str:

@@ -1,17 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { AccessCodeForm, useAccess } from "@/components/AccessCode";
 import { ConfidenceBar, StatusBadge } from "@/components/StatusBadge";
-import { api, DEMO, money, type DocumentDetail, type Invoice, type LineItem } from "@/lib/api";
+import { api, DEMO, money, reviewHref, type DocumentDetail, type Invoice, type LineItem } from "@/lib/api";
 
 const num = (v: string): number | null => (v.trim() === "" ? null : Number(v));
 
-export default function ReviewPage() {
-  const params = useParams<{ id: string }>();
-  const id = Number(params.id);
+export default function ReviewView({ id }: { id: number }) {
   const router = useRouter();
+  const { needsCode, refresh: refreshAccess } = useAccess();
   const [doc, setDoc] = useState<DocumentDetail | null>(null);
   const [form, setForm] = useState<Invoice | null>(null);
   const [categories, setCategories] = useState<string[]>([]);
@@ -87,7 +87,7 @@ export default function ReviewPage() {
       // Go to the next document waiting for review, if any
       const queue = await api.list("needs_review");
       const next = queue.find((d) => d.id !== id);
-      router.push(next ? `/review/${next.id}` : "/");
+      router.push(next ? reviewHref(next.id) : "/");
     } catch (e) {
       setError((e as Error).message);
       setBusy(false);
@@ -96,7 +96,7 @@ export default function ReviewPage() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.key === "Enter") approve();
+      if ((e.ctrlKey || e.metaKey) && e.key === "Enter" && !needsCode) approve();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -298,6 +298,9 @@ export default function ReviewPage() {
                 </div>
               )}
 
+              {needsCode && !DEMO ? (
+                <AccessCodeForm compact onUnlocked={refreshAccess} />
+              ) : (
               <div className="flex flex-wrap gap-2 pt-2">
                 <button className="btn btn-primary" disabled={busy || processing} onClick={approve} title="Ctrl+Enter">
                   ✓ Approve {doc.status === "needs_review" ? "& next" : ""}
@@ -311,6 +314,7 @@ export default function ReviewPage() {
                   Reject
                 </button>
               </div>
+              )}
             </div>
           )}
 

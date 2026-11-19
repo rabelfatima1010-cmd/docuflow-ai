@@ -13,5 +13,11 @@ os.environ["EXPORT_ON_APPROVE"] = "true"
 os.environ["GOOGLE_SERVICE_ACCOUNT_FILE"] = ""
 os.environ["N8N_EXPORT_WEBHOOK_URL"] = ""
 os.environ["WEBHOOK_SECRET"] = "test-secret"
+# Public-hosting safeguards off by default; test_safeguards.py turns them on per test
+os.environ["UPLOAD_ACCESS_CODE"] = ""
+os.environ["DAILY_UPLOAD_LIMIT"] = "0"
+os.environ["PER_IP_DAILY_LIMIT"] = "0"
+os.environ["SEED_DEMO"] = "false"
+os.environ["FRONTEND_DIR"] = str(_tmp / "no-frontend")
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))

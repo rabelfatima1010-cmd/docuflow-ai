@@ -1,4 +1,36 @@
-export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+// Empty = same origin (the backend serves this site). `npm run dev` sets it via .env.development.
+export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "";
+
+export const reviewHref = (id: number) => `/review/?id=${id}`;
+
+// ---------- access code (public hosting: needed for uploads and review actions) ----------
+
+const CODE_KEY = "docuflow.accessCode";
+
+export function getAccessCode(): string {
+  try {
+    return localStorage.getItem(CODE_KEY) ?? "";
+  } catch {
+    return "";
+  }
+}
+
+export function setAccessCode(code: string) {
+  try {
+    if (code) localStorage.setItem(CODE_KEY, code);
+    else localStorage.removeItem(CODE_KEY);
+  } catch {}
+}
+
+export interface Health {
+  ok: boolean;
+  extractor: string;
+  model: string;
+  queue: string;
+  access_code_required?: boolean;
+  remaining_today?: { site: number | null; visitor: number | null };
+  max_pdf_pages?: number;
+}
 /** Hosted read-only demo: data comes from a static snapshot in /public/demo (scripts/export_demo.py). */
 export const DEMO = process.env.NEXT_PUBLIC_DEMO_MODE === "1";
 export const REPO_URL = "https://github.com/rabelfatima1010-cmd/docuflow-ai";
@@ -97,7 +129,10 @@ export interface Stats {
 }
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(`${API_URL}${path}`, { cache: "no-store", ...init });
+  const headers = new Headers(init?.headers);
+  const code = getAccessCode();
+  if (init?.method && init.method !== "GET" && code) headers.set("X-Access-Code", code);
+  const res = await fetch(`${API_URL}${path}`, { cache: "no-store", ...init, headers });
   if (!res.ok) {
     let detail = res.statusText;
     try {
@@ -119,7 +154,8 @@ async function demoJson<T>(file: string): Promise<T> {
 }
 
 const demoApi = {
-  health: () => demoJson<{ ok: boolean; extractor: string; model: string; queue: string }>("health.json"),
+  health: () => demoJson<Health>("health.json"),
+  checkAccessCode: async (_code: string) => false,
   categories: () => demoJson<string[]>("categories.json"),
   list: async (status?: string) => {
     const docs = (await demoJson<DocumentSummary[]>("documents.json")).map((d) => ({ ...d, ...demoOverrides.get(d.id) }));
@@ -146,7 +182,12 @@ const demoApi = {
 };
 
 const liveApi = {
-  health: () => request<{ ok: boolean; extractor: string; model: string; queue: string }>("/api/health"),
+  health: () => request<Health>("/api/health"),
+  /** True when the server accepts this code. */
+  checkAccessCode: async (code: string) => {
+    const res = await fetch(`${API_URL}/api/access-code/check`, { method: "POST", headers: { "X-Access-Code": code } });
+    return res.ok;
+  },
   categories: () => request<string[]>("/api/categories"),
   list: (status?: string) =>
     request<DocumentSummary[]>(`/api/documents${status ? `?status=${encodeURIComponent(status)}` : ""}`),

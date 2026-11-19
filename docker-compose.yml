@@ -1,12 +1,11 @@
-# Full stack: API + worker + Postgres + Redis + frontend + n8n
+# Full stack: app (API + website) + workers + Postgres + Redis + n8n
 #   cp backend/.env.example backend/.env   (then edit)
 #   docker compose up --build
-# UI: http://localhost:3000   API docs: http://localhost:8000/docs   n8n: http://localhost:5678
+# App: http://localhost:8000   API docs: http://localhost:8000/docs   n8n: http://localhost:5678
+# (For a single-container deploy, just use the root Dockerfile on its own.)
 
 x-backend: &backend
-  build:
-    context: .
-    dockerfile: backend/Dockerfile
+  build: .
   env_file: backend/.env
   environment:
     DATABASE_URL: postgresql+psycopg://docuflow:docuflow@db:5432/docuflow
@@ -21,7 +20,7 @@ x-backend: &backend
       condition: service_started
 
 services:
-  api:
+  app:
     <<: *backend
     ports: ["8000:8000"]
 
@@ -46,20 +45,12 @@ services:
   redis:
     image: redis:7-alpine
 
-  frontend:
-    build:
-      context: frontend
-      args:
-        NEXT_PUBLIC_API_URL: http://localhost:8000
-    ports: ["3000:3000"]
-    depends_on: [api]
-
   n8n:
     image: n8nio/n8n:1.95.3
     ports: ["5678:5678"]
     env_file: backend/.env
     environment:
-      DOCUFLOW_API_URL: http://api:8000
+      DOCUFLOW_API_URL: http://app:8000
       N8N_BLOCK_ENV_ACCESS_IN_NODE: "false"
     volumes: [n8n:/home/node/.n8n]
 

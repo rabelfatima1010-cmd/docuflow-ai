@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { BarChartCard } from "@/components/BarChartCard";
-import { api, money, type Stats } from "@/lib/api";
+import { api, money, reviewHref, type Stats } from "@/lib/api";
 
 function Tile({ label, value, hint }: { label: string; value: string; hint?: string }) {
   return (
@@ -90,7 +90,7 @@ export default function DashboardPage() {
             {stats.anomalies.map((a) => (
               <li key={a.id}>
                 <span style={{ color: "var(--warn)" }}>!</span>{" "}
-                <Link className="underline" href={`/review/${a.id}`}>
+                <Link className="underline" href={reviewHref(a.id)}>
                   #{a.id}
                 </Link>{" "}
                 {a.vendor}: <b className="tabular">{fmt(a.total)}</b>{" "}

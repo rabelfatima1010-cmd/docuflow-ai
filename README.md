@@ -49,11 +49,13 @@ pip install -r requirements-dev.txt
 copy .env.example .env            # macOS/Linux: cp .env.example .env
 uvicorn app.main:app --reload --port 8000
 
-# Frontend (second terminal)
+# Website (second terminal)
 cd frontend
 npm install
-npm run dev                       # http://localhost:3000
+npm run dev                       # http://localhost:3000 (live-reload while editing)
 ```
+
+Or build the website once (`npm run build` in `frontend/`) and open everything from the backend alone at http://localhost:8000. That's how the hosted version runs. On first start the database is filled with the 20 sample invoices from a real AI run (`SEED_DEMO=true`).
 
 **Demo data:** `python scripts/make_samples.py --count 20` writes synthetic invoices to `samples/invoices/`. Drag them into the Inbox. In mock mode they're "extracted" from their ground truth, so you can demo the whole flow for free. Some samples are rotated, blurred or tinted, and a few contain deliberate math errors so they land in review.
 
@@ -73,7 +75,7 @@ cp backend/.env.example backend/.env    # edit it
 docker compose up --build
 ```
 
-UI at http://localhost:3000, API docs at http://localhost:8000/docs, n8n at http://localhost:5678. Compose runs Postgres, Redis, the API, 2 workers, the frontend and n8n.
+App at http://localhost:8000, API docs at http://localhost:8000/docs, n8n at http://localhost:5678. Compose runs Postgres, Redis, the app (API + website), 2 workers and n8n.
 
 ## n8n workflows
 
@@ -151,17 +153,42 @@ eval/run_eval.py           accuracy harness
 scripts/make_samples.py    synthetic invoice generator
 ```
 
-## Hosted read-only demo
+## Share it online (anyone can try it)
 
-The public demo is the frontend alone, built with `NEXT_PUBLIC_DEMO_MODE=1`. It reads a static snapshot of a real run from `frontend/public/demo/`, so it needs no backend and no API key, and visitors can't spend credits. Review and approve work in the browser but aren't saved; uploads are off.
+The root `Dockerfile` builds **one service** (website + API), so there's a single link to share. Visitors can browse the 20 sample invoices without anything; uploading their own invoices (real AI) needs an **access code** you give them, and daily limits cap your AI bill.
 
-To refresh the snapshot, process documents locally with the API running, then:
+### Deploy on Render (free tier)
 
-```bash
-backend\.venv\Scripts\python scripts\export_demo.py
-```
+1. Sign up at **render.com** (email is fine).
+2. **New → Web Service → Public Git Repository**, paste `https://github.com/rabelfatima1010-cmd/docuflow-ai`, and continue.
+3. Language/runtime **Docker**, instance type **Free**.
+4. Add environment variables:
 
-Deploy `frontend/` to Vercel (root directory `frontend`, env var `NEXT_PUBLIC_DEMO_MODE=1`).
+| Key | Value |
+|---|---|
+| `EXTRACTOR` | `openai` |
+| `OPENAI_API_KEY` | your key (keep it secret) |
+| `UPLOAD_ACCESS_CODE` | a code you'll share with friends, e.g. `invoice-demo-42` |
+| `DAILY_UPLOAD_LIMIT` | `40` (AI runs per day for the whole site) |
+| `PER_IP_DAILY_LIMIT` | `10` (per visitor) |
+
+5. **Create Web Service.** The first build takes a few minutes; then share the `https://….onrender.com` link and the code.
+
+Free-tier notes: the service **sleeps after 15 minutes without visitors** and takes about a minute to wake up on the next visit; its disk is temporary, so uploads disappear on restart and the sample invoices are loaded again automatically (daily counters reset too). **Also set a monthly spending limit in your OpenAI account** as a hard stop.
+
+### Safeguards (settings)
+
+| Setting | Default | What it does |
+|---|---|---|
+| `UPLOAD_ACCESS_CODE` | empty (off) | Required for uploads, approve/reject and re-runs. Browsing stays open. |
+| `DAILY_UPLOAD_LIMIT` | `40` | Max AI runs per day for the whole site (`0` = unlimited) |
+| `PER_IP_DAILY_LIMIT` | `10` | Max AI runs per day per visitor IP (`0` = unlimited) |
+| `MAX_PDF_PAGES` | `5` | Longer PDFs are refused |
+| `SEED_DEMO` | `true` | Load the sample run into an empty database on start |
+
+### Read-only static demo (optional)
+
+`frontend/` can also be built with `NEXT_PUBLIC_DEMO_MODE=1` into a static site that only shows the saved sample run (no server, no uploads). Refresh the snapshot with `backend\.venv\Scripts\python scripts\export_demo.py` while the API runs.
 
 ## Before putting it online
 

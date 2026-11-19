@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { AccessCodeForm, useAccess } from "@/components/AccessCode";
 import { ConfidenceBar, StatusBadge } from "@/components/StatusBadge";
-import { api, DEMO, money, REPO_URL, type DocumentSummary, type UploadResult } from "@/lib/api";
+import { api, DEMO, money, REPO_URL, reviewHref, type DocumentSummary, type UploadResult } from "@/lib/api";
 
 const FILTERS = [
   { label: "All", value: "" },
@@ -21,7 +22,7 @@ export default function InboxPage() {
   const [uploading, setUploading] = useState(false);
   const [lastUpload, setLastUpload] = useState<UploadResult[]>([]);
   const [dragOver, setDragOver] = useState(false);
-  const [health, setHealth] = useState<{ extractor: string; model: string; queue: string } | null>(null);
+  const { health, needsCode, refresh: refreshAccess } = useAccess();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const load = useCallback(async () => {
@@ -29,7 +30,7 @@ export default function InboxPage() {
       setDocs(await api.list(filter || undefined));
       setError(null);
     } catch (e) {
-      setError(`Cannot reach the API (${(e as Error).message}). Is the backend running on port 8000?`);
+      setError(`Cannot reach the server (${(e as Error).message}). It may be waking up; try again in a minute.`);
     }
   }, [filter]);
 
@@ -39,16 +40,12 @@ export default function InboxPage() {
     return () => clearInterval(t);
   }, [load]);
 
-  useEffect(() => {
-    api.health().then(setHealth).catch(() => setHealth(null));
-  }, []);
-
   async function upload(files: FileList | File[] | null) {
     if (!files || files.length === 0) return;
     setUploading(true);
     try {
       setLastUpload(await api.upload(Array.from(files)));
-      await load();
+      await Promise.all([load(), refreshAccess()]);
     } catch (e) {
       setError((e as Error).message);
     } finally {
@@ -70,12 +67,17 @@ export default function InboxPage() {
         </div>
         {health && (
           <span className="text-xs faint">
-            Extractor: <b>{health.model}</b> · Queue: {health.queue}
+            AI model: <b>{health.model}</b>
+            {health.remaining_today?.visitor != null && !needsCode && (
+              <> · {health.remaining_today.visitor} uploads left for you today</>
+            )}
           </span>
         )}
       </div>
 
-      {DEMO ? (
+      {!DEMO && needsCode ? (
+        <AccessCodeForm onUnlocked={refreshAccess} />
+      ) : DEMO ? (
         <div className="card p-6 text-center text-sm">
           <div className="font-semibold">Uploads are turned off in this live demo</div>
           <div className="muted mt-1">
@@ -107,7 +109,10 @@ export default function InboxPage() {
           ⇪
         </div>
         <div className="font-semibold">{uploading ? "Uploading…" : "Drop invoices here or click to browse"}</div>
-        <div className="text-xs faint">PDF, PNG, JPG or WEBP · up to 20 MB each</div>
+        <div className="text-xs faint">
+          PDF, PNG, JPG or WEBP · up to 20 MB each
+          {health?.max_pdf_pages ? ` · PDFs up to ${health.max_pdf_pages} pages` : ""}
+        </div>
         <input
           ref={inputRef}
           type="file"
@@ -128,7 +133,7 @@ export default function InboxPage() {
                 <b>{u.filename}</b>:{" "}
                 {u.status === "duplicate" ? (
                   <>
-                    already uploaded as <Link className="underline" href={`/review/${u.duplicate_of}`}>#{u.duplicate_of}</Link>
+                    already uploaded as <Link className="underline" href={reviewHref(u.duplicate_of!)}>#{u.duplicate_of}</Link>
                   </>
                 ) : (
                   <span style={{ color: "var(--bad)" }}>{u.error ?? u.status}</span>
@@ -191,7 +196,7 @@ export default function InboxPage() {
               <tr key={d.id} className="hover:brightness-95" style={{ borderTop: "1px solid var(--border)" }}>
                 <td className="px-4 py-3 faint tabular">{d.id}</td>
                 <td className="px-4 py-3">
-                  <Link href={`/review/${d.id}`} className="font-medium hover:underline">
+                  <Link href={reviewHref(d.id)} className="font-medium hover:underline">
                     {d.filename}
                   </Link>
                   <div className="text-xs faint">{d.source}</div>

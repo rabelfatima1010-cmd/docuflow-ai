@@ -4,12 +4,14 @@ import uuid
 from collections import defaultdict
 from pathlib import Path
 
-from fastapi import APIRouter, Depends, File, Form, Header, HTTPException, Query, UploadFile
+import pymupdf
+from fastapi import APIRouter, Depends, File, Form, Header, HTTPException, Query, Request, UploadFile
 from fastapi.responses import FileResponse, PlainTextResponse
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from app import worker
+from app.safeguards import AccessGuard, client_ip, consume_ai_run, remaining_today, require_access_code
 from app.config import get_settings
 from app.db import get_db
 from app.integrations.exporters import export_document, to_csv
@@ -83,7 +85,9 @@ def _get_doc(db: Session, doc_id: int) -> Document:
     return doc
 
 
-async def _ingest(db: Session, upload: UploadFile, source: str) -> UploadResult:
+async def _ingest(db: Session, upload: UploadFile, source: str, ip: str | None = None) -> UploadResult:
+    """Store an upload and queue it. `ip` set = a public visitor upload, which counts
+    against the daily AI limits; None = the owner's own automation (webhooks)."""
     settings = get_settings()
     filename = Path(upload.filename or "upload").name
     try:
@@ -96,6 +100,15 @@ async def _ingest(db: Session, upload: UploadFile, source: str) -> UploadResult:
         return UploadResult(id=None, filename=filename, status="rejected", error=f"File exceeds {settings.max_upload_mb} MB.")
     if not data:
         return UploadResult(id=None, filename=filename, status="rejected", error="File is empty.")
+    if mime == "application/pdf" and settings.max_pdf_pages > 0:
+        try:
+            with pymupdf.open(stream=data, filetype="pdf") as pdf:
+                pages = pdf.page_count
+        except Exception:
+            return UploadResult(id=None, filename=filename, status="rejected", error="Could not open this PDF.")
+        if pages > settings.max_pdf_pages:
+            return UploadResult(id=None, filename=filename, status="rejected",
+                                error=f"PDF has {pages} pages; the limit is {settings.max_pdf_pages}.")
 
     file_hash = sha256_bytes(data)
     existing = (
@@ -105,6 +118,13 @@ async def _ingest(db: Session, upload: UploadFile, source: str) -> UploadResult:
     )
     if existing:
         return UploadResult(id=existing.id, filename=filename, status="duplicate", duplicate_of=existing.id)
+
+    if ip is not None:
+        try:
+            consume_ai_run(db, ip, "upload")
+        except HTTPException as exc:
+            db.rollback()
+            return UploadResult(id=None, filename=filename, status="rejected", error=exc.detail)
 
     settings.storage_dir.mkdir(parents=True, exist_ok=True)
     path = settings.storage_dir / f"{uuid.uuid4().hex}{Path(filename).suffix.lower()}"
@@ -119,10 +139,18 @@ async def _ingest(db: Session, upload: UploadFile, source: str) -> UploadResult:
 # ---------- documents ----------
 
 @router.get("/health")
-def health():
+def health(request: Request, db: Session = Depends(get_db)):
     s = get_settings()
     return {"ok": True, "extractor": s.extractor, "model": s.active_model,
-            "queue": "redis" if s.redis_url else "in-process"}
+            "queue": "redis" if s.redis_url else "in-process",
+            "access_code_required": bool(s.upload_access_code),
+            "remaining_today": remaining_today(db, client_ip(request)),
+            "max_pdf_pages": s.max_pdf_pages}
+
+
+@router.post("/access-code/check")
+def check_access_code(_: None = Depends(require_access_code)):
+    return {"ok": True}
 
 
 @router.get("/categories")
@@ -131,8 +159,8 @@ def categories():
 
 
 @router.post("/documents", response_model=list[UploadResult])
-async def upload_documents(files: list[UploadFile] = File(...), db: Session = Depends(get_db)):
-    return [await _ingest(db, f, "upload") for f in files]
+async def upload_documents(files: list[UploadFile] = File(...), guard: AccessGuard = Depends()):
+    return [await _ingest(guard.db, f, "upload", ip=guard.ip) for f in files]
 
 
 @router.get("/documents", response_model=list[DocumentSummary])
@@ -174,7 +202,8 @@ def _diff(old: dict, new: dict, prefix: str = "") -> list[tuple[str, str | None,
 
 
 @router.post("/documents/{doc_id}/approve", response_model=DocumentDetail)
-def approve_document(doc_id: int, body: ApproveRequest, db: Session = Depends(get_db)):
+def approve_document(doc_id: int, body: ApproveRequest, guard: AccessGuard = Depends()):
+    db = guard.db
     doc = _get_doc(db, doc_id)
     if doc.status in (DocStatus.QUEUED, DocStatus.PROCESSING):
         raise HTTPException(409, "Document is still processing")
@@ -193,7 +222,8 @@ def approve_document(doc_id: int, body: ApproveRequest, db: Session = Depends(ge
 
 
 @router.post("/documents/{doc_id}/reject", response_model=DocumentDetail)
-def reject_document(doc_id: int, db: Session = Depends(get_db)):
+def reject_document(doc_id: int, guard: AccessGuard = Depends()):
+    db = guard.db
     doc = _get_doc(db, doc_id)
     doc.status = DocStatus.REJECTED
     db.commit()
@@ -201,10 +231,12 @@ def reject_document(doc_id: int, db: Session = Depends(get_db)):
 
 
 @router.post("/documents/{doc_id}/reprocess", response_model=DocumentDetail)
-def reprocess_document(doc_id: int, db: Session = Depends(get_db)):
+def reprocess_document(doc_id: int, guard: AccessGuard = Depends()):
+    db = guard.db
     doc = _get_doc(db, doc_id)
     if doc.status == DocStatus.PROCESSING:
         raise HTTPException(409, "Document is already processing")
+    consume_ai_run(db, guard.ip, "reprocess")
     doc.status, doc.error, doc.approved_data = DocStatus.QUEUED, None, None
     db.commit()
     worker.enqueue(doc.id)
@@ -212,7 +244,8 @@ def reprocess_document(doc_id: int, db: Session = Depends(get_db)):
 
 
 @router.post("/documents/{doc_id}/export", response_model=DocumentDetail)
-def export_one(doc_id: int, db: Session = Depends(get_db)):
+def export_one(doc_id: int, guard: AccessGuard = Depends()):
+    db = guard.db
     doc = _get_doc(db, doc_id)
     if doc.status not in DocStatus.DONE:
         raise HTTPException(409, "Only approved documents can be exported")

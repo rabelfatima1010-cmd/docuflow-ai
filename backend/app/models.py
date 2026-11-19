@@ -100,6 +100,17 @@ class Vendor(Base):
     default_category: Mapped[str | None] = mapped_column(String(64), nullable=True)
 
 
+class UsageEvent(Base):
+    """One AI processing run requested by a visitor (upload or re-run), for daily limits."""
+
+    __tablename__ = "usage_events"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    kind: Mapped[str] = mapped_column(String(16))  # upload | reprocess
+    client_ip: Mapped[str] = mapped_column(String(64), index=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, index=True)
+
+
 class Correction(Base):
     __tablename__ = "corrections"
 
