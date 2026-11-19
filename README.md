@@ -2,6 +2,10 @@
 
 Upload invoices and receipts (PDFs or phone photos). An AI model (Claude or OpenAI GPT, your choice) reads each one, the data is checked automatically, and the agent re-reads the document when the numbers don't add up. Clean documents are approved on their own; uncertain ones wait in a review screen. Approved data goes to Google Sheets, CSV, or any n8n flow (QuickBooks, Xero, Airtable and so on).
 
+### 🔗 [Try the live demo](https://docuflow-ai-88ti.onrender.com)
+
+Browse 20 sample invoices read by the AI, open any one to compare the extracted data with the image, and explore the dashboard. Uploading your own invoices needs an access code; [ask me for one](https://github.com/rabelfatima1010-cmd). The demo runs on a free server, so the first visit after a quiet period can take about a minute to wake up.
+
 ![Review screen: the AI flagged a total that doesn't match subtotal + tax](docs/screenshots/2-review.png)
 
 | Inbox | Dashboard |
@@ -151,6 +155,9 @@ frontend/                  Next.js 15 + Tailwind + Recharts (Inbox, Review, Dash
 n8n/workflows/             importable n8n workflows
 eval/run_eval.py           accuracy harness
 scripts/make_samples.py    synthetic invoice generator
+scripts/export_demo.py     snapshot of a real run (loaded on start, and for the static demo)
+scripts/make_social.py     renders docs/social/slides.html into Instagram slides + LinkedIn PDF
+Dockerfile                 one container: API + website (used by Render)
 ```
 
 ## Share it online (anyone can try it)
@@ -190,8 +197,10 @@ Free-tier notes: the service **sleeps after 15 minutes without visitors** and ta
 
 `frontend/` can also be built with `NEXT_PUBLIC_DEMO_MODE=1` into a static site that only shows the saved sample run (no server, no uploads). Refresh the snapshot with `backend\.venv\Scripts\python scripts\export_demo.py` while the API runs.
 
-## Before putting it online
+## Taking it to production
 
-- Add authentication. The API is open and the demo has no logins.
-- Use Postgres instead of SQLite, plus `REDIS_URL` with workers (Docker Compose does both).
+The public demo is protected by an access code and daily limits. For a real client deployment:
+
+- Add user accounts (login per person) instead of one shared access code, so each client sees only their own documents.
+- Use Postgres and persistent file storage instead of SQLite on a temporary disk, plus `REDIS_URL` with workers (Docker Compose does both).
 - Decide on file retention for clients' documents, and keep `.env` out of git.

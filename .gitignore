@@ -29,3 +29,6 @@ frontend/out/
 
 # Non-secret frontend dev setting
 !frontend/.env.development
+
+# Personal test files
+test-invoices/
