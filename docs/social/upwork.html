@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>DocuFlow AI - Upwork portfolio images</title>
+<!-- Upwork portfolio images, 1600x1200 (4:3). Render one with ?s=N (1-7).
+     Theme matches the Upwork profile thumbnails: #010000 -> #730041 diagonal gradient, Poppins.
+     Rebuild: backend\.venv\Scripts\python scripts\make_upwork.py -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:linear-gradient(135deg, #010000 0%, #3a0021 50%, #730041 100%);
+          --card:rgba(255,255,255,.07); --border:rgba(255,255,255,.16); --text:#ffffff; --muted:#f0d9e3; --faint:#c9a3b4;
+          --accent:#ff7aa8; --accent-ink:#3a0021; --accent-soft:rgba(255,122,168,.16); --good:#7be3a0; --warn:#ffd27a; --bad:#ff9a98; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html, body { width:1600px; height:1200px; overflow:hidden; background:#010000; }
+  body { color:var(--text); font-family:"Poppins", "Segoe UI", system-ui, sans-serif; }
+  .slide { display:none; width:1600px; height:1200px; padding:72px 100px; flex-direction:column; background:var(--bg); }
+  .slide.on { display:flex; }
+  .brand { font-size:26px; font-weight:700; color:var(--muted); }
+  .brand span { color:var(--accent); }
+  .kicker { margin-top:40px; font-size:24px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); }
+  h2 { font-size:64px; line-height:1.12; font-weight:800; letter-spacing:-.01em; margin-top:10px; }
+  .hl { color:var(--accent); }
+  .lead { font-size:28px; line-height:1.45; color:var(--muted); margin-top:16px; max-width:1300px; }
+  .shot { border-radius:20px; border:2px solid var(--border); background-repeat:no-repeat; box-shadow:0 30px 80px rgba(0,0,0,.5); }
+  .grow { flex:1; display:flex; align-items:center; justify-content:center; gap:40px; }
+  .cover { justify-content:center; align-items:center; text-align:center; }
+  .cover .title { font-size:150px; font-weight:800; line-height:1.08; letter-spacing:-.015em; }
+  .steps { display:grid; grid-template-columns:repeat(4, 1fr); gap:24px; margin-top:64px; }
+  .step { background:var(--card); border:2px solid var(--border); border-radius:22px; padding:40px 32px; min-height:430px; }
+  .n { width:64px; height:64px; border-radius:50%; background:var(--accent); color:var(--accent-ink); font-size:30px; font-weight:800; display:flex; align-items:center; justify-content:center; }
+  .step b { display:block; font-size:34px; font-weight:700; margin-top:22px; line-height:1.2; }
+  .step span { display:block; font-size:25px; color:var(--muted); margin-top:14px; line-height:1.5; }
+  .flow { margin-top:52px; display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
+  .flow .lbl { font-size:24px; color:var(--faint); margin-right:6px; }
+  .chip { border:2px solid var(--border); border-radius:999px; padding:10px 22px; font-size:22px; color:var(--muted); background:var(--card); }
+  .side { width:520px; display:flex; flex-direction:column; gap:22px; }
+  .point { background:var(--card); border:2px solid var(--border); border-radius:20px; padding:26px 28px; }
+  .point b { display:block; font-size:28px; font-weight:700; }
+  .point span { display:block; font-size:22px; color:var(--muted); margin-top:8px; line-height:1.45; }
+  .tag { display:inline-flex; align-items:center; gap:10px; font-size:22px; font-weight:700; padding:8px 18px; border-radius:999px; }
+  .tag.bad { background:rgba(255,154,152,.16); color:var(--bad); }
+  .tag.good { background:rgba(123,227,160,.16); color:var(--good); }
+  .tag.warn { background:rgba(255,210,122,.16); color:var(--warn); }
+  .stats { display:grid; grid-template-columns:repeat(4, 1fr); gap:24px; margin-top:52px; }
+  .stat { background:var(--card); border:2px solid var(--border); border-radius:22px; padding:38px 32px; }
+  .stat .big { font-size:88px; font-weight:800; line-height:1; font-variant-numeric:tabular-nums; }
+  .stat .lbl { font-size:24px; color:var(--muted); margin-top:14px; line-height:1.35; }
+  .demo { margin-top:40px; display:flex; align-items:center; justify-content:space-between; gap:30px; background:#ffffff; color:var(--accent-ink); border-radius:24px; padding:36px 44px; }
+  .demo .t { font-size:40px; font-weight:800; color:#730041; }
+  .demo .u { font-size:30px; font-weight:600; margin-top:6px; }
+  .demo .s { font-size:22px; color:#6b4a58; margin-top:6px; }
+  .note { margin-top:22px; font-size:20px; color:var(--faint); }
+</style>
+</head>
+<body>
+
+<!-- 1. Cover: same style as the existing Upwork thumbnails -->
+<section class="slide cover">
+  <div class="title">AI Invoice<br>Processing Agent</div>
+</section>
+
+<!-- 2. Hero -->
+<section class="slide">
+  <div class="brand">DocuFlow <span>AI</span></div>
+  <div class="kicker">What it does</div>
+  <h2>Reads invoices, checks the math, <span class="hl">fixes its own mistakes</span></h2>
+  <div class="grow">
+    <div class="shot" data-src="../screenshots/2-review.png" data-crop="176,120,1248,730" data-w="1180"></div>
+  </div>
+</section>
+
+<!-- 3. How it works -->
+<section class="slide">
+  <div class="brand">DocuFlow <span>AI</span></div>
+  <div class="kicker">How it works</div>
+  <h2>From inbox to accounting, <span class="hl">without typing</span></h2>
+  <div class="steps">
+    <div class="step"><div class="n">1</div><b>Invoices arrive</b><span>Upload a PDF, scan or phone photo, or pull them from Gmail and Google Drive automatically.</span></div>
+    <div class="step"><div class="n">2</div><b>AI reads every field</b><span>Vendor, invoice #, dates, currency, line items, tax and total, as validated structured data.</span></div>
+    <div class="step"><div class="n">3</div><b>Checks &amp; self-corrects</b><span>Line items vs. subtotal, subtotal + tax vs. total, dates, duplicates. On a mismatch it re-reads the page.</span></div>
+    <div class="step"><div class="n">4</div><b>Approves or flags</b><span>Confident results are approved and exported. Uncertain ones go to a review screen with the problem highlighted.</span></div>
+  </div>
+  <div class="flow">
+    <span class="lbl">Exports to</span>
+    <span class="chip">Google Sheets</span><span class="chip">QuickBooks / Xero (n8n)</span><span class="chip">CSV</span><span class="chip">Any n8n workflow</span>
+  </div>
+  <div class="flow" style="margin-top:18px">
+    <span class="lbl">Built with</span>
+    <span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">OpenAI / Claude vision</span><span class="chip">Pydantic</span><span class="chip">OpenCV</span><span class="chip">Next.js</span><span class="chip">n8n</span><span class="chip">Docker</span>
+  </div>
+</section>
+
+<!-- 4. Error catching -->
+<section class="slide">
+  <div class="brand">DocuFlow <span>AI</span></div>
+  <div class="kicker">Human-in-the-loop review</div>
+  <h2>Wrong totals never reach <span class="hl">your books</span></h2>
+  <div class="grow" style="align-items:center">
+    <div style="display:flex; flex-direction:column; gap:18px">
+      <div class="shot" data-src="../screenshots/2-review.png" data-crop="808,122,616,86" data-w="820"></div>
+      <div class="shot" data-src="../screenshots/2-review.png" data-crop="808,800,616,184" data-w="820"></div>
+    </div>
+    <div class="side">
+      <div class="point"><b>Caught automatically</b><span>Subtotal + tax = €2,915.22, but the invoice says €2,940.72.</span></div>
+      <div class="point"><b>Re-read before flagging</b><span>The agent re-checked the page twice and kept the printed value instead of "fixing" it.</span></div>
+      <div class="point"><b>One-click review</b><span>The wrong field is highlighted; approve and the next invoice opens.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Inbox -->
+<section class="slide">
+  <div class="brand">DocuFlow <span>AI</span></div>
+  <div class="kicker">Confidence-based routing</div>
+  <h2><span class="hl">85%</span> of invoices processed with no human</h2>
+  <div class="grow" style="flex-direction:column; gap:26px">
+    <div class="shot" data-src="../screenshots/1-inbox.png" data-crop="400,402,1000,540" data-w="1300"></div>
+    <div style="display:flex; gap:16px"><span class="tag good">✓ 17 approved automatically</span><span class="tag warn">! 3 sent to review</span><span class="tag good">Confidence score on every document</span></div>
+  </div>
+</section>
+
+<!-- 6. Dashboard -->
+<section class="slide">
+  <div class="brand">DocuFlow <span>AI</span></div>
+  <div class="kicker">Analytics dashboard</div>
+  <h2>See where the money goes</h2>
+  <div class="grow">
+    <div class="shot" data-src="../screenshots/3-dashboard.png" data-crop="176,172,1248,848" data-w="1110"></div>
+  </div>
+</section>
+
+<!-- 7. Results + live demo -->
+<section class="slide">
+  <div class="brand">DocuFlow <span>AI</span></div>
+  <div class="kicker">Benchmark results</div>
+  <h2>Tested on 20 invoices &amp; receipts</h2>
+  <div class="stats">
+    <div class="stat"><div class="big">100%</div><div class="lbl">of fields read correctly</div></div>
+    <div class="stat"><div class="big">85%</div><div class="lbl">processed with no human</div></div>
+    <div class="stat"><div class="big">~1¢</div><div class="lbl">AI cost per invoice</div></div>
+    <div class="stat"><div class="big">7s</div><div class="lbl">per invoice</div></div>
+  </div>
+  <p class="note">Synthetic benchmark: clean, rotated, blurred and tinted scans in 4 currencies. 2 of 2 planted math errors caught; 0 wrong totals auto-approved.</p>
+  <div class="demo">
+    <div><div class="t">Try the live demo</div><div class="u">docuflow-ai-88ti.onrender.com</div><div class="s">Message me for the upload access code.</div></div>
+    <div style="font-size:72px">🔗</div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll(".shot").forEach((el) => {
+    const [x, y, w, h] = el.dataset.crop.split(",").map(Number);
+    const d = Number(el.dataset.w), k = d / w;
+    Object.assign(el.style, {
+      width: d + "px", height: Math.round(h * k) + "px",
+      backgroundImage: `url(${el.dataset.src})`,
+      backgroundSize: `${1600 * k}px ${1200 * k}px`,
+      backgroundPosition: `${-x * k}px ${-y * k}px`,
+    });
+  });
+  const n = Number(new URLSearchParams(location.search).get("s") || 1);
+  document.querySelectorAll(".slide")[n - 1].classList.add("on");
+</script>
+</body>
+</html>

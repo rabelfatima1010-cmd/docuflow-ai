@@ -4,10 +4,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { AccessCodeForm, useAccess } from "@/components/AccessCode";
+import { NumberInput } from "@/components/NumberInput";
 import { ConfidenceBar, StatusBadge } from "@/components/StatusBadge";
 import { api, DEMO, money, reviewHref, type DocumentDetail, type Invoice, type LineItem } from "@/lib/api";
 
-const num = (v: string): number | null => (v.trim() === "" ? null : Number(v));
 
 export default function ReviewView({ id }: { id: number }) {
   const router = useRouter();
@@ -251,13 +251,13 @@ export default function ReviewView({ id }: { id: number }) {
                             <input className={cls("line_items")} value={li.description} onChange={(e) => setItem(i, { description: e.target.value })} />
                           </td>
                           <td className="pr-1">
-                            <input className="input tabular" value={li.quantity ?? ""} onChange={(e) => setItem(i, { quantity: num(e.target.value) })} />
+                            <NumberInput className="input tabular" value={li.quantity} onChange={(v) => setItem(i, { quantity: v })} />
                           </td>
                           <td className="pr-1">
-                            <input className="input tabular" value={li.unit_price ?? ""} onChange={(e) => setItem(i, { unit_price: num(e.target.value) })} />
+                            <NumberInput className="input tabular" value={li.unit_price} onChange={(v) => setItem(i, { unit_price: v })} />
                           </td>
                           <td className="pr-1">
-                            <input className={`${cls("line_items")} tabular`} value={li.amount} onChange={(e) => setItem(i, { amount: Number(e.target.value) || 0 })} />
+                            <NumberInput className={`${cls("line_items")} tabular`} value={li.amount} allowEmpty={false} onChange={(v) => setItem(i, { amount: v ?? 0 })} />
                           </td>
                           <td>
                             <button
@@ -278,15 +278,15 @@ export default function ReviewView({ id }: { id: number }) {
               <div className="grid grid-cols-3 gap-3 text-sm">
                 <label className="space-y-1">
                   <span className="muted">Subtotal</span>
-                  <input className={`${cls("subtotal")} tabular`} value={form.subtotal ?? ""} onChange={(e) => set("subtotal", num(e.target.value))} />
+                  <NumberInput className={`${cls("subtotal")} tabular`} value={form.subtotal} onChange={(v) => set("subtotal", v)} />
                 </label>
                 <label className="space-y-1">
                   <span className="muted">Tax</span>
-                  <input className={`${cls("tax")} tabular`} value={form.tax ?? ""} onChange={(e) => set("tax", num(e.target.value))} />
+                  <NumberInput className={`${cls("tax")} tabular`} value={form.tax} onChange={(v) => set("tax", v)} />
                 </label>
                 <label className="space-y-1">
                   <span className="muted">Total</span>
-                  <input className={`${cls("total")} tabular font-semibold`} value={form.total} onChange={(e) => set("total", Number(e.target.value) || 0)} />
+                  <NumberInput className={`${cls("total")} tabular font-semibold`} value={form.total} allowEmpty={false} onChange={(v) => set("total", v ?? 0)} />
                 </label>
               </div>
 
